@@ -1,0 +1,92 @@
+.active{
+    stroke-width: 5;
+    stroke: rgb(102, 70, 91);
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+@media only screen and (min-width: 600px) {
+    .container{
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}
+
+h1{
+    width: 100%;
+    background-color: #ffd523;
+    margin: 0px;
+    padding: 20px;
+}
+
+p{
+    padding: 5px;
+}
+
+#test, #test2{
+    border: #d9d9d9;
+    border-style: dashed;
+    border-width: 3px;
+    position: relative;
+}
+
+.example{
+    position: absolute;
+    right: 0px;
+    background-color: #d9d9d9;
+    color: #616161;
+    padding: 4px;
+}
+
+#json{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.button{
+    padding: 10px;
+    width: 100px;
+    background-color: #ffd523;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.button:hover{
+    background-color: #ffe883;
+}
+
+.button-secondary{
+    padding: 10px;
+    width: 150px;
+    border-color: #ffd523;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.button-secondary:hover{
+    background-color: #ffd523;
+}
+
+.circle{
+    width:50px; 
+    height: 50px; 
+    flex: 0 0 50px;
+    border-radius:50%; 
+    background-color: #9b9b9b; 
+    text-align: center;
+    line-height: 50px;
+    color:white;
+    display: inline-block;
+}
+
+.footer{
+    width: 100%;
+    background-color: #ffd523;
+    margin-top: 40px;
+    padding: 10px;
+    text-align: right;
+}

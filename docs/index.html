@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>workflow-svg.js</title>  
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/polyfills.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/polyfillsIE.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
+  <script src="../lib/workflow-svg.minified.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <script>
+
+    var callback = function(){
+      document.getElementById("json").innerHTML  = JSON.stringify(w2.get(), undefined, 2);
+    }
+
+    var w = new WorkflowSVG();
+    w.initalize("#test", 500, 400);
+
+    var w2 = new WorkflowSVG();
+    w2.initalize("#test2", 500, 400);
+    
+    w.update({
+      entries:[
+        {id:'first', text:'first', x: 10, y: 10, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10},
+        {id:'second', text:'second', x: 125, y: 125, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10},
+        {id:'third', text:'third', x: 250, y: 250, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10}
+      ],
+      lines: [],
+      configuration: {
+        line_color: '#f06',
+        arrow_type: 'default'
+      }
+    });
+
+    w2.update({
+      "entries":[
+        {"id":"new","text":"new","x":10,"y":100,"width":100,"height":80,"backgroundcolor":"#f06","color":"#ffffff","radius":10,"class":"active"},
+        {"id":"in-progress","text":"in progress","x":160,"y":100,"width":100,"height":80,"backgroundcolor":"#f06","color":"#ffffff","radius":10},
+        {"id":"finished","text":"finished","x":310,"y":100,"width":100,"height":80,"backgroundcolor":"#f06","color":"#ffffff","radius":10}
+      ],
+      "lines":[],
+      "configuration":{"line_color":"#f06","arrow_type":"default"}
+    });
+
+    w2.register('entity:moved', callback);
+    w2.register('line:added', callback);
+
+    </script>
+
+    <div class="container">
+      <h1>workflow-svg.js</h1>
+      <p>
+        workflow-svg.js is an easy to use library to visualize an workflow and to adapt it. Just try it! 
+      </p> 
+
+      <div style="display:flex; margin-bottom:20px;">
+        <div id="test"><div class="example">Example</div></div>
+        <div style="margin-left: 20px;">
+          <p>
+            You can drag and drop the workflow entities. 
+            On the edges of a entity you can create a line to another entity. 
+            Just select the starting point ...
+          </p>
+          <img src="example-1_.png" style="width:120px"/>
+          <p>
+            ... and then select the target point. That is all!
+          </p>
+          <img src="example-2_.png" style="width:120px"/>
+        </div>
+
+      </div>
+      <p>
+            You can configure and define your entities and lines. 
+            You can define colors, size and even classes to apply your style from a css.
+      </p>
+      <p>
+        <a class="button-secondary">See documentation</a>
+      </p>
+
+      <div style="display:flex; flex-wrap: wrap; margin-bottom:20px;">
+        <div style="padding-right: 10px; margin-right: 20px;">
+          
+          <p>
+            Try to connect "new" and "in progress"! 
+          </p>
+          <p>Output:</p>
+          <pre id="json">...change something on the left side</pre>
+        </div>
+        <div>
+        <div id="test2"><div class="example">Example</div></div>
+          
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap: wrap; align-items: center; margin-top:20px;">
+        <div class="circle">2</div>
+        <p>
+          workflow-svg.js is small and light. It has only two other dependencies which you need to import.
+        </p>
+      </div>
+      <div style="display:flex; flex-wrap: wrap; align-items: center; margin-top:20px;">
+        <div class="circle">4</div>
+        <p>
+          workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
+        </p>
+      </div>
+      <div style="text-align: center; padding-top:50px;">
+        <a class="button">GET IT NOW</a>
+      </div>
+
+      <div class="footer">
+        workflow-svg.js is under MIT License
+      </div>
+    </div>
+</body>
+</html>

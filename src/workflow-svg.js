@@ -1,7 +1,7 @@
 var WorkflowSVG = (function () {
     const PADDING = 50;
     const MARGIN = 50;
-    var _json = { entries:[]};
+    var _json = { entities:[]};
     var _draw;
     var _selectedPoints = [];
     var _lines = [];
@@ -11,14 +11,14 @@ var WorkflowSVG = (function () {
     function initalize(id, width, height){
         SVG.on(document, 'DOMContentLoaded', function() {
             _draw = SVG().addTo(id).size(width, height);
-            _draw.entries = [];
+            _draw.entities = [];
             _draw.lines = _draw.group();
         });
     }       
     
     function _createEntity(_draw, entry) {
         var group = _draw.group().attr({id: entry.id});
-        _draw.entries.push(group);
+        _draw.entities.push(group);
 
         //default values
         entry.backgroundcolor = entry.backgroundcolor ? entry.backgroundcolor : '#f06';
@@ -391,15 +391,15 @@ var WorkflowSVG = (function () {
     }
 
     function _update(){
-        _draw.entries.forEach(entry => entry.remove());
-        _draw.entries = [];
+        _draw.entities.forEach(entry => entry.remove());
+        _draw.entities = [];
 
         _lines.forEach(arrow => arrow.remove());
         _lines = [];
 
         _selectedPoints = [];
 
-        _json.entries.forEach(entry => _createEntity(_draw, entry));
+        _json.entities.forEach(entry => _createEntity(_draw, entry));
 
         _lines = _copy(_json.lines);
 

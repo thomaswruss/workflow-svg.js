@@ -40,12 +40,12 @@ The JSON contains of three fields.
 
 |Field| Type| Description|
 |---|---|---|
-| entries | array | Entries of a workflow.|
-| lines | array | Lines between the entries.|
+| entities | array | Entities of a workflow.|
+| lines | array | Lines between the entities.|
 | configuration | object| Defines some configuration that will be applied to the whole chart.|
 
 The fields are explained now into more detail.
-### entries
+### entities
 One entity in the array contains the following attributes:
 
 |Attribute| Type| Description|

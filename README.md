@@ -32,6 +32,7 @@ Create a new *workflow-svg.js* instance with `new WorkflowSVG();`. The object ha
 |entity:clicked| Event when some entity was clicked|
 |line:added| Event when a line was added between some entity|
 |line:clicked| Event when some line was clicked|
+
 You always get the ID of the related entity/line.
 
 ## JSON
@@ -46,6 +47,7 @@ The JSON contains of three fields.
 The fields are explained now into more detail.
 ### entries
 One entity in the array contains the following attributes:
+
 |Attribute| Type| Description|
 |---|---|---|
 |id| string | Unique id of the entity|
@@ -59,6 +61,7 @@ One entity in the array contains the following attributes:
 
 ### lines
 One line in the array contains the following attributes:
+
 |Attribute| Type| Description|
 |---|---|---|
 |id| string | Unique id of the line|
@@ -67,6 +70,7 @@ One line in the array contains the following attributes:
 
 ### configuration
 The configuration contains the following attributes:
+
 |Attribute| Type| Description|
 |---|---|---|
 | line_color | string(hex) | Color of all lines|

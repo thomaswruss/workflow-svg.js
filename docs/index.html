@@ -7,6 +7,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js/lib/workflow-svg.minified.js"></script>
+  
+  <!--use this one if you want to test some code-->
+  <!-- <script src="./../src/workflow-svg.js"></script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css">
@@ -58,11 +61,62 @@
           }
         }
       ],
-      "configuration":{"line_color":"#000000","arrow_type":"default"}
+      "configuration":{
+        "line_color":"#000000",
+        "arrow_type":"default"
+      }
     });
 
     w2.register('entity:moved', callback);
     w2.register('line:added', callback);
+
+    var w3 = new WorkflowSVG();
+    w3.initalize("#test3", 500, 400);
+
+    w3.update({
+      "entities":[
+        {"id":"search","text":"search","x":20,"y":10,"width":100,"height":60,"backgroundcolor":"#ACFCD9","color":"#2F4858","radius":2},
+        {"id":"analyze","text":"analyze","x":20,"y":110,"width":100,"height":60,"backgroundcolor":"#5DD9C1","color":"#2F4858","radius":2},
+        {"id":"review","text":"review","x":20,"y":210,"width":100,"height":60,"backgroundcolor":"#98C1D9","color":"#2F4858","radius":2},
+        {"id":"useit","text":"use it","x":20,"y":310,"width":100,"height":60,"backgroundcolor":"#4F7CAC","color":"#F0F7EE","radius":2}
+      ],
+      "lines": [
+        {
+          "id": "line-0",
+          "from": {
+            "element": "search",
+            "point": "bottom"
+          },
+          "to": {
+            "element": "analyze",
+            "point": "top"
+          }
+        },
+        {
+          "id": "line-1",
+          "from": {
+            "element": "analyze",
+            "point": "bottom"
+          },
+          "to": {
+            "element": "review",
+            "point": "top"
+          }
+        },
+        {
+          "id": "line-2",
+          "from": {
+            "element": "review",
+            "point": "bottom"
+          },
+          "to": {
+            "element": "useit",
+            "point": "top"
+          }
+        }
+      ],
+      "configuration":{"line_color":"#000000","arrow_type":"default", "readonly": true}
+    });
 
     </script>
 
@@ -117,6 +171,16 @@
         <div>
         <div id="test2"><div class="example">Example</div></div>
           
+        </div>
+      </div>
+
+      <div style="display:flex; margin-bottom:20px;">        
+        <div id="test3"><div class="example">Example</div></div>
+        <div style="margin-left: 20px;">     
+          <p>
+            You can use workflow-svg.js in "read-only" mode too. Just add 
+            <span class="code">"readonly": true</span> in the config.
+          </p>
         </div>
       </div>
 

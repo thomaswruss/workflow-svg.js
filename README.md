@@ -72,7 +72,8 @@ One line in the array contains the following attributes:
 ### configuration
 The configuration contains the following attributes:
 
-|Attribute| Type| Description|
-|---|---|---|
-| line_color | string(hex) | Color of all lines|
-| arrow_type | 'default' or 'none'| At the moment there are only two arrow type: default or none|
+|Attribute| Type| Description| Default value |
+|---|---|---|---|
+| line_color | string(hex) | Color of all lines| '#000000' (=black) |
+| arrow_type | 'default' or 'none'| At the moment there are only two arrow type: default or none| 'default'|
+| readonly | boolean |If true, the chart will be readonly| false |

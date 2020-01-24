@@ -54,10 +54,12 @@ var WorkflowSVG = (function () {
         group.dragGroup = group.group(); 
 
         //dragabble area
-        group.rect(entity.width-PADDING, entity.height-PADDING)
+        var draggableElement = group.rect(entity.width-PADDING, entity.height-PADDING)
             .move(entity.x+(PADDING/2),entity.y+(PADDING/2))
-            .attr({ opacity: '0' })
-            .draggable()
+            .attr({ opacity: '0' });
+
+        if(!_json.configuration.readonly){
+            draggableElement.draggable()
             .on('dragmove.namespace', (e) => {
                 e.preventDefault();
                 var box = e.detail.box;
@@ -73,23 +75,25 @@ var WorkflowSVG = (function () {
                 _call('entity:clicked', _getIdFromEntity(e));
             });
 
-        // if hovering - show drag points
-        hoverArea.on('mouseover', function(evt){
-            _renderPoint(_draw, group, 'top');
-            _renderPoint(_draw, group, 'right');
-            _renderPoint(_draw, group, 'bottom');
-            _renderPoint(_draw, group, 'left');
-            evt.stopPropagation();
-        });
-
-        // if hovering outside - remove drag points (except the one selected)
-        _draw.on('mouseover', function(){
-            group.dragPoints.forEach(d => {
-                    if(!_selectedPoints.includes(d)){
-                        d.remove();
-                    }
+             // if hovering - show drag points
+            hoverArea.on('mouseover', function(evt){
+                _renderPoint(_draw, group, 'top');
+                _renderPoint(_draw, group, 'right');
+                _renderPoint(_draw, group, 'bottom');
+                _renderPoint(_draw, group, 'left');
+                evt.stopPropagation();
             });
-        });
+
+             // if hovering outside - remove drag points (except the one selected)
+            _draw.on('mouseover', function(){
+                group.dragPoints.forEach(d => {
+                        if(!_selectedPoints.includes(d)){
+                            d.remove();
+                        }
+                });
+            });
+        }
+
     }
 
     function _renderPoint(_draw, group, id){
@@ -144,7 +148,7 @@ var WorkflowSVG = (function () {
 
     function _renderOnePolyline(_draw, line){
         var polyline = '';
-        var line_color = _json.configuration.line_color ? _json.configuration.line_color : 'black';
+        var line_color = _json.configuration.line_color;
         var from = _draw.findOne('#'+line.from.element);
         var to = _draw.findOne('#'+line.to.element);
         var pointsInBetween = _calculatePointsInBetween(line, from, to);
@@ -398,6 +402,13 @@ var WorkflowSVG = (function () {
         _lines = [];
 
         _selectedPoints = [];
+
+        if(!_json.configuration){
+            _json.configuration = {};
+        }
+        _json.configuration.readonly = _json.configuration.readonly ? _json.configuration.readonly  : false; 
+        _json.configuration.line_color = _json.configuration.line_color ? _json.configuration.line_color : '#000000';
+        _json.configuration.arrow_type = _json.configuration.arrow_type ? _json.configuration.arrow_type : 'default';
 
         _json.entities.forEach(entity => _createEntity(_draw, entity));
 

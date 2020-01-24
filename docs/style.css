@@ -37,7 +37,13 @@ p{
     padding: 5px;
 }
 
-#test, #test2{
+.code{
+    font-family: monospace;
+    background-color: #efefef;
+    padding: 2px;
+}
+
+#test, #test2, #test3{
     border: #d9d9d9;
     border-style: dashed;
     border-width: 3px;

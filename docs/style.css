@@ -5,17 +5,27 @@
 
 body{
     font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+.github-badge{
+    position: absolute;
+    width: 1000px;
+}
+
+.github-badge > a {
+    float: right;
 }
 
 @media only screen and (min-width: 600px) {
     .container{
-        padding-left: 20%;
-        padding-right: 20%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1000px;
     }
 }
 
 h1{
-    width: 100%;
     background-color: #ffd523;
     margin: 0px;
     padding: 20px;
@@ -88,7 +98,6 @@ p{
 }
 
 .footer{
-    width: 100%;
     background-color: #ffd523;
     margin-top: 40px;
     padding: 10px;

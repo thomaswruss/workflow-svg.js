@@ -1,5 +1,5 @@
 # workflow-svg.js
-*workflow-svg.js* is a JS Library to present and edit workflows as SVG. You can move entities and define connections between them. It is simple to include and configure it for your project.
+*workflow-svg.js* is a JS Library to present and edit workflows as SVG. You can move entities and define connections between them. It is simple to include and configure it for your project. Take a look at a real example on [https://thomaswruss.github.io/workflow-svg.js/](https://thomaswruss.github.io/workflow-svg.js/).
 
 ## How to import
 *workflow-svg.js* is a self containing library and has some requirements that has to be imported first:
@@ -19,6 +19,7 @@ In `./docs/index.html` and `./test.html` you can find examples how to include, c
 ## How to use
 
 Create a new *workflow-svg.js* instance with `new WorkflowSVG();`. The object has the following methods.
+
 |Method| Description|
 |---|---|
 |initalize(id, width, height)| Has to be called to initalize the SVG. 'id' is the `<div>` Element where the SVG should be rendered with the defined 'width' and 'height'|

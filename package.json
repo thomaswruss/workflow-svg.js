@@ -2,7 +2,7 @@
   "name": "workflow-svg.js",
   "version": "0.0.2",
   "description": "",
-  "main": "workflow-svg.js",
+  "main": "./lib/workflow-svg.minified.js",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@svgdotjs/svg.draggable.js": "^3.0.2",

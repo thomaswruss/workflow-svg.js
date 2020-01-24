@@ -8,16 +8,18 @@ body{
     display: flex;
 }
 
-.github-badge{
-    position: absolute;
-    width: 1000px;
-}
 
 .github-badge > a {
     float: right;
 }
 
 @media only screen and (min-width: 600px) {
+
+    .github-badge{
+        position: absolute;
+        width: 1000px;
+    }
+
     .container{
         margin-left: auto;
         margin-right: auto;

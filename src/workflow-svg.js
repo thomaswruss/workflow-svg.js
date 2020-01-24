@@ -68,6 +68,7 @@ var WorkflowSVG = (function () {
                 entity.y =  box.y-(PADDING);       
                 _renderPolylines(_draw, _lines);
             })
+            .attr({'cursor': 'grab'})
             .on('dragend', (e) => {
                 _call('entity:moved',  _getIdFromEntity(e));
             })

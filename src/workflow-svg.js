@@ -36,7 +36,7 @@ var WorkflowSVG = (function () {
 
         group.entity.displaytype = entity.displaytype;
 
-        if(entity.displaytype==='or'){
+        if(entity.displaytype==='operation'){
             group.entity.transform({'rotate': 45, origin: 'center center'});
         }
 
@@ -59,7 +59,7 @@ var WorkflowSVG = (function () {
                             .cy((entity.height/2))
                             .attr({ opacity: '0', fill:'#FFBF00'});
 
-        if(entity.displaytype==='or'){
+        if(entity.displaytype==='operation'){
             hoverArea.transform({'rotate': 45});
         }
         
@@ -385,7 +385,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateX(group, position){
-        var width = (group.entity.displaytype==='or') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
+        var width = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
 
         switch(position){
             case 'right':
@@ -399,7 +399,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateY(group, position){
-        var height = (group.entity.displaytype==='or') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
+        var height = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
 
         switch(position){
             case 'right':
@@ -442,10 +442,8 @@ var WorkflowSVG = (function () {
         _json.entities.map(entity => {
             entity.displaytype = entity.displaytype ? entity.displaytype: 'entity';
 
-            if(entity.displaytype==='or'){
-                entity.width = 80;
-                entity.height = 80;
-                entity.text = 'X';
+            if(entity.displaytype==='operation'){
+                entity.height = entity.width;
             }
         })
         _json.entities.forEach(entity => _createEntity(_draw, entity));

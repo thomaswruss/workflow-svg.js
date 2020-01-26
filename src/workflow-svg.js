@@ -1,6 +1,6 @@
 var WorkflowSVG = (function () {
-    const PADDING = 50;
-    const MARGIN = 50;
+    const PADDING = 10;
+    const MARGIN = 25;
     var _json = { entities:[]};
     var _draw;
     var _selectedPoints = [];
@@ -20,7 +20,7 @@ var WorkflowSVG = (function () {
         var group = _draw.group().attr({id: entity.id});
         _draw.entities.push(group);
 
-        //default values
+        //assginment and default values for entities
         entity.backgroundcolor = entity.backgroundcolor ? entity.backgroundcolor : '#f06';
         entity.color = entity.color ? entity.color : '#ffffff';
         entity.radius = entity.radius ? entity.radius : 0;
@@ -29,17 +29,24 @@ var WorkflowSVG = (function () {
 
         //the real entity
         group.entity = group.rect(entity.width, entity.height)
-            .move(entity.x, entity.y)
+            .cx((entity.width/2))
+            .cy((entity.height/2))
             .attr({ fill: entity.backgroundcolor })
             .radius(entity.radius);
+
+        group.entity.displaytype = entity.displaytype;
+
+        if(entity.displaytype==='operation'){
+            group.entity.transform({'rotate': 45, origin: 'center center'});
+        }
 
         if(entity.class){
             group.entity.attr("class", entity.class);
         }
   
         group.text(entity.text)
-            .cx(entity.x+(entity.width/2))
-            .cy(entity.y+(entity.height/2))
+            .cx((entity.width/2))
+            .cy((entity.height/2))
             .attr({ fill: entity.color})
             .font({
                 family: 'Helvetica'
@@ -47,27 +54,39 @@ var WorkflowSVG = (function () {
 
         group.arrows = group.group();
 
-        var hoverArea = group.rect(entity.width+MARGIN, entity.height+MARGIN)
-                            .move(entity.x-(MARGIN/2),entity.y-(MARGIN/2))
+        var hoverArea = group.rect(entity.width+(MARGIN*2), entity.height+(MARGIN*2))
+                            .cx((entity.width/2))
+                            .cy((entity.height/2))
                             .attr({ opacity: '0', fill:'#FFBF00'});
+
+        if(entity.displaytype==='operation'){
+            hoverArea.transform({'rotate': 45});
+        }
         
         group.dragGroup = group.group(); 
 
         //dragabble area
-        var draggableElement = group.rect(entity.width-PADDING, entity.height-PADDING)
-            .move(entity.x+(PADDING/2),entity.y+(PADDING/2))
-            .attr({ opacity: '0' });
+        var draggableElement = group.rect(entity.width-(PADDING*2), entity.height-(PADDING*2))
+            .cx((entity.width/2))
+            .cy((entity.height/2))
+            .attr({opacity: 0});
 
         if(!_json.configuration.readonly){
             draggableElement.draggable()
             .on('dragmove.namespace', (e) => {
                 e.preventDefault();
                 var box = e.detail.box;
-                group.move(box.x-(PADDING), box.y-(PADDING));  
-                entity.x =  box.x-(PADDING);
-                entity.y =  box.y-(PADDING);       
+                
+                group.cx(box.cx);
+                group.cy(box.cy); 
+    
+                //to update json
+                entity.x =  group.x()+MARGIN;
+                entity.y =  group.y()+MARGIN;
+                
                 _renderPolylines(_draw, _lines);
             })
+            .attr({'cursor': 'grab'})
             .on('dragend', (e) => {
                 _call('entity:moved',  _getIdFromEntity(e));
             })
@@ -94,11 +113,13 @@ var WorkflowSVG = (function () {
             });
         }
 
+        group.move(entity.x-MARGIN, entity.y-MARGIN);
+
     }
 
     function _renderPoint(_draw, group, id){
-        var x = _calculateX(group.entity, id);
-        var y = _calculateY(group.entity, id);
+        var x = _calculateX(group, id);
+        var y = _calculateY(group, id);
         group.dragPoints.push(group.dragGroup.circle(10, 10)
                 .attr({ fill:'white', stroke:'#d4d4d4', id: id})
                 .move(x-5, y-5)
@@ -154,20 +175,20 @@ var WorkflowSVG = (function () {
         var pointsInBetween = _calculatePointsInBetween(line, from, to);
 
         //start point
-        polyline += _calculateX(from.entity, line.from.point) +','+_calculateY(from.entity, line.from.point)+' ';
+        polyline += _calculateX(from, line.from.point) +','+_calculateY(from, line.from.point)+' ';
         
         // points between them
         pointsInBetween.forEach(p => polyline += p.x +','+ p.y +' ');
 
         //end point - we have to cut a little bit because of the arrow
         if(line.to.point === "top"){
-            polyline += _calculateX(to.entity, line.to.point) +','+(_calculateY(to.entity, line.to.point)-5)+' ';
+            polyline += _calculateX(to, line.to.point) +','+(_calculateY(to, line.to.point)-5)+' ';
         } else if(line.to.point === "right") {
-            polyline += (_calculateX(to.entity, line.to.point)+5) +','+_calculateY(to.entity, line.to.point)+' ';
+            polyline += (_calculateX(to, line.to.point)+5) +','+_calculateY(to, line.to.point)+' ';
         } else if(line.to.point === "bottom"){
-            polyline += _calculateX(to.entity, line.to.point) +','+(_calculateY(to.entity, line.to.point)+5)+' ';
+            polyline += _calculateX(to, line.to.point) +','+(_calculateY(to, line.to.point)+5)+' ';
         } else{
-            polyline += (_calculateX(to.entity, line.to.point)-5) +','+_calculateY(to.entity, line.to.point)+' ';
+            polyline += (_calculateX(to, line.to.point)-5) +','+_calculateY(to, line.to.point)+' ';
         }
 
         if(!line.polyline){
@@ -190,19 +211,19 @@ var WorkflowSVG = (function () {
     function _renderArrow(line, to, line_color){
         if(!line.to.arrow){
             if(_json.configuration.arrow_type==='default'){
-                var arrow = _calculateX(to.entity, line.to.point) +','+_calculateY(to.entity, line.to.point) + ' ';
+                var arrow = _calculateX(to, line.to.point) +','+_calculateY(to, line.to.point) + ' ';
                 if(line.to.point === 'top'){
-                    arrow += (_calculateX(to.entity, line.to.point)+7) +','+(_calculateY(to.entity, line.to.point)-14) + ' ';
-                    arrow += (_calculateX(to.entity, line.to.point)-7) +','+(_calculateY(to.entity, line.to.point)-14) + ' ';
+                    arrow += (_calculateX(to, line.to.point)+7) +','+(_calculateY(to, line.to.point)-14) + ' ';
+                    arrow += (_calculateX(to, line.to.point)-7) +','+(_calculateY(to, line.to.point)-14) + ' ';
                 } else if(line.to.point === 'right'){
-                    arrow += (_calculateX(to.entity, line.to.point)+14) +','+(_calculateY(to.entity, line.to.point)-7) + ' ';
-                    arrow += (_calculateX(to.entity, line.to.point)+14) +','+(_calculateY(to.entity, line.to.point)+7) + ' ';
+                    arrow += (_calculateX(to, line.to.point)+14) +','+(_calculateY(to, line.to.point)-7) + ' ';
+                    arrow += (_calculateX(to, line.to.point)+14) +','+(_calculateY(to, line.to.point)+7) + ' ';
                 } else if(line.to.point === 'bottom'){
-                    arrow += (_calculateX(to.entity, line.to.point)+7) +','+(_calculateY(to.entity, line.to.point)+14) + ' ';
-                    arrow += (_calculateX(to.entity, line.to.point)-7) +','+(_calculateY(to.entity, line.to.point)+14) + ' ';
+                    arrow += (_calculateX(to, line.to.point)+7) +','+(_calculateY(to, line.to.point)+14) + ' ';
+                    arrow += (_calculateX(to, line.to.point)-7) +','+(_calculateY(to, line.to.point)+14) + ' ';
                 } else {
-                    arrow += (_calculateX(to.entity, line.to.point)-14) +','+(_calculateY(to.entity, line.to.point)-7) + ' ';
-                    arrow += (_calculateX(to.entity, line.to.point)-14) +','+(_calculateY(to.entity, line.to.point)+7) + ' ';
+                    arrow += (_calculateX(to, line.to.point)-14) +','+(_calculateY(to, line.to.point)-7) + ' ';
+                    arrow += (_calculateX(to, line.to.point)-14) +','+(_calculateY(to, line.to.point)+7) + ' ';
                 }
                 line.to.arrow = to.arrows.polygon(arrow).fill(line_color).stroke({ width: 1 });
             }
@@ -212,10 +233,10 @@ var WorkflowSVG = (function () {
     function _calculatePointsInBetween(line, from, to){
         var pointsInBetween = [];
 
-        var y1 = _calculateY(from.entity, line.from.point);
-        var y2 = _calculateY(to.entity, line.to.point);
-        var x1 = _calculateX(from.entity, line.from.point);
-        var x2 = _calculateX(to.entity, line.to.point);
+        var y1 = _calculateY(from, line.from.point);
+        var y2 = _calculateY(to, line.to.point);
+        var x1 = _calculateX(from, line.from.point);
+        var x2 = _calculateX(to, line.to.point);
 
         var p1 = _translatePositionToNumber(line.from.point);
         var p2 = _translatePositionToNumber(line.to.point);
@@ -363,31 +384,37 @@ var WorkflowSVG = (function () {
         }
     }
 
-    function _calculateX(entity, position){
+    function _calculateX(group, position){
+        var width = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
+
         switch(position){
             case 'right':
-                return entity.attr('width')+entity.attr('x');
+                return group.cx()+(width/2);
             case 'top':
-                return  (entity.attr('width')/2)+entity.attr('x');
             case 'bottom':
-                return (entity.attr('width')/2)+entity.attr('x');
+                return  group.cx();
             default:
-                return entity.attr('x')
-
+                return group.cx()-(width/2);
         }
     }
 
-    function _calculateY(entity, position){
+    function _calculateY(group, position){
+        var height = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
+
         switch(position){
             case 'right':
-                return (entity.attr('height')/2)+entity.attr('y');
+                return group.cy();
             case 'top':
-                return entity.attr('y');
+                return group.cy()-(height/2);
             case 'bottom':
-                return entity.attr('height')+entity.attr('y')
+                return group.cy()+(height/2);
             default:
-                return (entity.attr('height')/2)+entity.attr('y');
+                return group.cy();
         }       
+    }
+
+    function _pythagorean(a, b){
+        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
 
     function _copy(obj){
@@ -406,10 +433,19 @@ var WorkflowSVG = (function () {
         if(!_json.configuration){
             _json.configuration = {};
         }
+
+        //default value for config
         _json.configuration.readonly = _json.configuration.readonly ? _json.configuration.readonly  : false; 
         _json.configuration.line_color = _json.configuration.line_color ? _json.configuration.line_color : '#000000';
         _json.configuration.arrow_type = _json.configuration.arrow_type ? _json.configuration.arrow_type : 'default';
 
+        _json.entities.map(entity => {
+            entity.displaytype = entity.displaytype ? entity.displaytype: 'entity';
+
+            if(entity.displaytype==='operation'){
+                entity.height = entity.width;
+            }
+        })
         _json.entities.forEach(entity => _createEntity(_draw, entity));
 
         _lines = _copy(_json.lines);

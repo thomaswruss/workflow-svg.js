@@ -53,6 +53,7 @@ One entity in the array contains the following attributes:
 |---|---|---|
 |id| string | Unique id of the entity|
 |text| string | Text of the entity |
+|displaytype| string | Type of entity. Default is 'entity'. For workflow operations use: 'operation' |
 |x| integer | X coordinate of the entity |
 |y| integer | Y coordinate of the entity |
 |backgroundcolor| string(hex) | Background Color of the entity|
@@ -66,8 +67,8 @@ One line in the array contains the following attributes:
 |Attribute| Type| Description|
 |---|---|---|
 |id| string | Unique id of the line|
-|from| object| Object that contains: 'element' - the id from the source entity, and 'point' - where the line starts at this entity (top, right, bottom, left)|
-|to| object| Object that contains: 'element' - the id from the target entity, and 'point' - where the line ends at this entity (top, right, bottom, left)|
+|from| object| Object that contains: <br>- 'element' - the id from the source entity, <br>- 'point' - where the line starts at this entity (top, right, bottom, left)|
+|to| object| Object that contains: <br>- 'element' - the id from the target entity, <br>- 'point' - where the line ends at this entity (top, right, bottom, left)|
 
 ### configuration
 The configuration contains the following attributes:

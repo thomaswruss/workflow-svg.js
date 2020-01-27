@@ -11,6 +11,20 @@ var WorkflowSVG = (function () {
     function initalize(id, width, height){
         SVG.on(document, 'DOMContentLoaded', function() {
             _draw = SVG().addTo(id).size(width, height);
+           
+            //grid
+            _draw.gridGroup= _draw.group();
+            _draw.grid = {
+                x: _draw.gridGroup.polyline([[_draw.width()/2, 0], [_draw.width()/2, _draw.height()]])
+                        .fill('none')
+                        .stroke({ color: 'red', width: 1, linecap: 'round', linejoin: 'round' })
+                        .hide(),
+                y: _draw.gridGroup.polyline([[0, _draw.height()/2], [_draw.width(), _draw.height()/2]])
+                        .fill('none')
+                        .stroke({ color: 'red', width: 1, linecap: 'round', linejoin: 'round' })
+                        .hide()
+            }
+
             _draw.entities = [];
             _draw.lines = _draw.group();
         });
@@ -76,6 +90,22 @@ var WorkflowSVG = (function () {
             .on('dragmove.namespace', (e) => {
                 e.preventDefault();
                 var box = e.detail.box;
+
+                var nearToMiddleY = box.cy - (_draw.height()/2);
+                if(nearToMiddleY < 10 && nearToMiddleY > -10){
+                    box.cy = _draw.height()/2;
+                    _draw.grid.y.show();
+                } else{
+                    _draw.grid.y.hide();
+                }
+
+                var nearToMiddleX = box.cx - (_draw.width()/2);
+                if(nearToMiddleX < 10 && nearToMiddleX > -10){
+                    box.cx = _draw.width()/2;
+                    _draw.grid.x.show();
+                } else{
+                    _draw.grid.x.hide();
+                }
                 
                 group.cx(box.cx);
                 group.cy(box.cy); 
@@ -88,6 +118,8 @@ var WorkflowSVG = (function () {
             })
             .attr({'cursor': 'grab'})
             .on('dragend', (e) => {
+                _draw.grid.x.hide();
+                _draw.grid.y.hide();
                 _call('entity:moved',  _getIdFromEntity(e));
             })
             .on('click', (e) => {

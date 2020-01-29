@@ -78,3 +78,8 @@ The configuration contains the following attributes:
 | line_color | string(hex) | Color of all lines| '#000000' (=black) |
 | arrow_type | 'default' or 'none'| At the moment there are only two arrow type: default or none| 'default'|
 | readonly | boolean |If true, the chart will be readonly| false |
+| grid_type | 'static' or 'dynamic' | If 'static' - grid lines will always be shown. Otherwise the grid line will only be shown if the dragged entity is near enough -tjis is called 'dynamic'. | 'dynamic' |
+| grid_x | array | Array of objects <br> - 'value': the x coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] | 
+| grid_y | array | Array of objects <br> - 'value': the y coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] |
+
+The configuration is completely optional. All non-existent values ​​are set automatically.

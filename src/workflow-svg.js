@@ -15,14 +15,8 @@ var WorkflowSVG = (function () {
             //grid
             _draw.gridGroup= _draw.group();
             _draw.grid = {
-                x: _draw.gridGroup.polyline([[_draw.width()/2, 0], [_draw.width()/2, _draw.height()]])
-                        .fill('none')
-                        .stroke({ color: 'red', width: 1, linecap: 'round', linejoin: 'round' })
-                        .hide(),
-                y: _draw.gridGroup.polyline([[0, _draw.height()/2], [_draw.width(), _draw.height()/2]])
-                        .fill('none')
-                        .stroke({ color: 'red', width: 1, linecap: 'round', linejoin: 'round' })
-                        .hide()
+                x: [],
+                y: []
             }
 
             _draw.entities = [];
@@ -30,7 +24,7 @@ var WorkflowSVG = (function () {
         });
     }       
     
-    function _createEntity(_draw, entity) {
+    function _renderEntities(_draw, entity) {
         var group = _draw.group().attr({id: entity.id});
         _draw.entities.push(group);
 
@@ -91,21 +85,25 @@ var WorkflowSVG = (function () {
                 e.preventDefault();
                 var box = e.detail.box;
 
-                var nearToMiddleY = box.cy - (_draw.height()/2);
-                if(nearToMiddleY < 10 && nearToMiddleY > -10){
-                    box.cy = _draw.height()/2;
-                    _draw.grid.y.show();
-                } else{
-                    _draw.grid.y.hide();
-                }
+                _draw.grid.x.forEach( grid => {
+                    var nearX = box.cx - grid.value;
+                    if(nearX < 10 && nearX > -10){
+                        box.cx = grid.value;
+                        grid.line.show();
+                    } else{
+                        if(_json.configuration.grid_type != 'static') grid.line.hide();
+                    }
+                });
 
-                var nearToMiddleX = box.cx - (_draw.width()/2);
-                if(nearToMiddleX < 10 && nearToMiddleX > -10){
-                    box.cx = _draw.width()/2;
-                    _draw.grid.x.show();
-                } else{
-                    _draw.grid.x.hide();
-                }
+                _draw.grid.y.forEach( grid => {
+                    var nearY = box.cy - grid.value;
+                    if(nearY < 10 && nearY > -10){
+                        box.cy = grid.value;
+                        grid.line.show();
+                    } else{
+                        if(_json.configuration.grid_type != 'static') grid.line.hide();
+                    }
+                });
                 
                 group.cx(box.cx);
                 group.cy(box.cy); 
@@ -118,8 +116,11 @@ var WorkflowSVG = (function () {
             })
             .attr({'cursor': 'grab'})
             .on('dragend', (e) => {
-                _draw.grid.x.hide();
-                _draw.grid.y.hide();
+                if(_json.configuration.grid_type != 'static'){
+                    _draw.grid.y.forEach( grid => grid.line.hide());
+                    _draw.grid.x.forEach( grid => grid.line.hide());
+                }
+                
                 _call('entity:moved',  _getIdFromEntity(e));
             })
             .on('click', (e) => {
@@ -147,6 +148,44 @@ var WorkflowSVG = (function () {
 
         group.move(entity.x-MARGIN, entity.y-MARGIN);
 
+    }
+
+    function _renderGrid() {
+        if(_json.configuration.grid_x && _json.configuration.grid_x.length > 0){
+           _json.configuration.grid_x.forEach( x => {
+                _draw.grid.x.push({
+                    value: x.value,
+                    line: _draw.gridGroup.polyline([[x.value, 0], [x.value, _draw.height()]])
+                            .fill('none')
+                            .stroke({ 
+                                color: x.color ? x.color : 'black', 
+                                width: x.width ? x.width : 1, 
+                                linecap: 'round', 
+                                linejoin: 'round'
+                            })
+                });
+           });
+
+           if(_json.configuration.grid_type!='static') _draw.grid.x.forEach(x => x.line.hide());
+        }
+
+        if(_json.configuration.grid_y && _json.configuration.grid_y.length > 0){
+            _json.configuration.grid_y.forEach( y => {
+                 _draw.grid.y.push({
+                     value: y.value,
+                     line: _draw.gridGroup.polyline([[0, y.value], [_draw.width(), y.value]])
+                             .fill('none')
+                             .stroke({ 
+                                color: y.color ? y.color : 'black', 
+                                width: y.width ? y.width : 1, 
+                                linecap: 'round', 
+                                linejoin: 'round'
+                            })
+                 });
+            });
+
+            if(_json.configuration.grid_type!='static') _draw.grid.y.forEach(y => y.line.hide());
+         }
     }
 
     function _renderPoint(_draw, group, id){
@@ -454,22 +493,51 @@ var WorkflowSVG = (function () {
     }
 
     function _update(){
+
+        //clean up
         _draw.entities.forEach(entity => entity.remove());
         _draw.entities = [];
 
         _lines.forEach(arrow => arrow.remove());
         _lines = [];
 
+        _draw.grid.x.forEach(x => x.line.remove());
+        _draw.grid.y.forEach(y => x.line.remove());
+        _draw.grid = {
+            x: [],
+            y: []
+        }
+
         _selectedPoints = [];
 
+        // default values
         if(!_json.configuration){
             _json.configuration = {};
         }
 
-        //default value for config
         _json.configuration.readonly = _json.configuration.readonly ? _json.configuration.readonly  : false; 
         _json.configuration.line_color = _json.configuration.line_color ? _json.configuration.line_color : '#000000';
         _json.configuration.arrow_type = _json.configuration.arrow_type ? _json.configuration.arrow_type : 'default';
+
+        if(_json.configuration.grid_x && _json.configuration.grid_x.length>0 ){
+            _json.configuration.grid_x.map( x => {
+                value: x.value ? x.value : 0;
+                width: x.width ? x.width : 1;
+                color: x.color ? x.color : 'black';
+            });
+        }else{
+            _json.configuration.grid_x = [];
+        }
+
+        if(_json.configuration.grid_y && _json.configuration.grid_y.length>0 ){
+            _json.configuration.grid_y.map( y => {
+                value: y.value ? y.value : 0;
+                width: y.width ? y.width : 1;
+                color: y.color ? y.color : 'black';
+            });
+        }else{
+            _json.configuration.grid_y = [];
+        }
 
         _json.entities.map(entity => {
             entity.displaytype = entity.displaytype ? entity.displaytype: 'entity';
@@ -478,9 +546,14 @@ var WorkflowSVG = (function () {
                 entity.height = entity.width;
             }
         })
-        _json.entities.forEach(entity => _createEntity(_draw, entity));
 
-        _lines = _copy(_json.lines);
+        //rendering
+
+        _renderGrid();
+
+        _json.entities.forEach(entity => _renderEntities(_draw, entity));
+
+        _lines = _copy(_json.lines); // needed to have no circular dependencies
 
         _renderPolylines(_draw, _lines);
 

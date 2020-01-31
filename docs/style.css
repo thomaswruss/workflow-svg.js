@@ -42,6 +42,12 @@ h1{
     padding: 20px;
 }
 
+h2{
+    background-color: #ffd523;
+    margin: 0px;
+    padding: 20px;
+}
+
 p{
     padding: 5px;
 }

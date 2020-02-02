@@ -15,7 +15,10 @@ body{
 
 
 .container-with-columns{
-    display:flex; flex-wrap:wrap; margin-bottom:20px;
+    display:flex; 
+    flex-wrap:wrap;
+    align-items:flex-start;
+    margin-bottom:20px;
 }
 
 @media only screen and (min-width: 600px) {
@@ -50,6 +53,11 @@ h2{
 
 p{
     padding: 5px;
+    line-height: 2;
+}
+
+ul {
+    line-height: 2;
 }
 
 .code{
@@ -108,16 +116,18 @@ p{
     background-color: #ffd523;
 }
 
-.circle{
-    width:50px; 
-    height: 50px; 
-    flex: 0 0 50px;
-    border-radius:50%; 
-    background-color: #9b9b9b; 
-    text-align: center;
-    line-height: 50px;
-    color:white;
-    display: inline-block;
+.faq{
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 10px;
+}
+
+.faq-card{
+    background-color: #fff2bb;
+    justify-content: center; 
+    padding: 10px;
+    margin: 10px;
+    flex-basis: 300px;
 }
 
 .footer{

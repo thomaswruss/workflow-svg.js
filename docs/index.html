@@ -12,6 +12,8 @@
   <!-- <script src="./../src/workflow-svg.js"></script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css">
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -203,72 +205,114 @@
       </div>
 
       <h1>workflow-svg.js</h1>
-      <p>
-        workflow-svg.js is an easy to use library to visualize an workflow and to adapt it. Just try it! 
-      </p> 
+      <div style="text-align:center; margin-top:80px">
+        <p style="color: #9b9b9b; font-family: 'Cormorant Garamond', serif; font-size: x-large;">The workflow editor you shouldn't miss</p>
+        <img src="./workflow.png" width="100px"/>
+      </div>
+
+      <p style="padding: 10px; margin-bottom: 30px;">
+        workflow-svg.js is an easy to use library to visualize a workflow and to adapt it. 
+        It is very customizable for your own requirements. Learn more about it and try the exciting examples.
+      </p>
 
       <div class="container-with-columns">
-        <div id="test"><div class="example">Example</div></div>
-        <div style="margin-left: 20px;">
+        <div >
+          <h2>The first try</h2>
           <p>
-            You can drag and drop the workflow entities. 
+            Here is a simple example: you can easily move the workflow entities using "drag and drop".
+          </p>
+          <p>
+            You can define relationships between workflow entities. It's very easy.
             On the edges of a entity you can create a line to another entity. 
             Just select the starting point ...
           </p>
           <img src="example-1_.png" style="width:120px"/>
           <p>
-            ... and then select the target point. That is all!
+            ... and then select the target point.
           </p>
-          <img src="example-2_.png" style="width:120px"/>
+          <img src="example-2_.png" style="width:160px"/>
+          <p>That is all: you have defined your first relationship between entities!</p>
         </div>
-
+        <div id="test" style="margin-left: 20px;" ><div class="example">Example</div></div>
       </div>
-
+      <h2>Customize to your needs</h2>
       <p>
-            Define your workflow with a simple JSON. You can configure and define your entities and lines and operations between entities. 
-            You can define different types, colors, size and even classes to apply your style from a css.
+        workflow-svg.js is designed to give you the power to customize it to your needs. 
+        You can define 
+        <ul>
+          <li>workflow entities,</li> 
+          <li>relationships between them (even more complex) and</li> 
+          <li>document it with labels.</li> 
+        </ul>
+        You can set different types, colors, size and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too. 
       </p>
-      <p>
+
+      <p style="margin-bottom: 30px;">
         <a class="button-secondary" href="https://github.com/thomaswruss/workflow-svg.js">See documentation</a>
       </p>
 
-      <div class="container-with-columns">
-        <div style="padding-right: 10px; margin-right: 20px;">
-          
-          <p>
-            Try to connect "new" and "in progress" and see the result as a JSON. 
-          </p>
-          <p>Output:</p>
-          <pre id="json">...change something on the left side</pre>
-        </div>
-        <div>
-        <div id="test2"><div class="example">Example</div></div>
-          
-        </div>
-      </div>
-
       <div class="container-with-columns">        
         <div id="test3"><div class="example">Example</div></div>
-        <div style="margin-left: 20px;">     
+        <div style="margin-left: 20px;">
           <p>
-            You can use workflow-svg.js in "read-only" mode too. Just add 
-            <span class="code">"readonly": true</span> in the config.
+            In this example you see different colors for the background of entities and their text and a different color for the relationships. The radius of the corners is smaller. 
+          </p>
+          <p>
+            The SVG is in "read-only" mode. Just add 
+            <span class="code">"readonly": true</span> in the config and no changes can be done.
+          </p>
+          <p>
+            This is just a small part of the possibilities you can do with it.
           </p>
         </div>
       </div>
 
-      <div style="display:flex; align-items: center; margin-top:20px;">
-        <div class="circle">2</div>
-        <p style="padding-left: 10px;">
-          workflow-svg.js is small and light. It has only two other dependencies which you need to import.
-        </p>
+      <div class="container-with-columns" style="margin-top: 40px;">        
+        <div style="padding-right: 10px; margin-right: 20px;">
+          <h2>How to configure</h2>     
+          <p>
+            With workflow-svg.js you can track the changes at any time using callbacks and events. 
+            This is very usefull - you have controll over everything all the time. 
+          </p>
+          <p>
+            Change something in the diagram (e.g. connect "new" and "in progress"). 
+            You will get the updated JSON that you can also use to build in workflow-svg.js.
+          </p>
+        </div>        
+        <div id="test2" >
+          <div class="example">Example</div>
+        </div>
       </div>
-      <div style="display:flex; align-items: center; margin-top:20px;">
-        <div class="circle">4</div>
-        <p style="padding-left: 10px;">
-          workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
-        </p>
+      <div>
+        <p>Output:</p>
+        <pre id="json">...change something on the left side</pre>
       </div>
+
+      <h2>
+        FAQ
+      </h2>
+
+      <div class="faq" style="display:flex;">
+        <div class="faq-card">
+          <h3>
+            How big is the library?
+          </h3>
+          <p>
+            workflow-svg.js is small and light. It has only two other dependencies which you need to import.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Is it complex to learn? 
+          </h3>
+          <p>
+            workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
+          </p>
+        </div>
+
+      </div>
+
       <div style="text-align: center; padding-top:50px;">
         <a class="button" href="https://github.com/thomaswruss/workflow-svg.js">GET IT NOW</a>
       </div>

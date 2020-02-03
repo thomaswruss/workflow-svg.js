@@ -292,13 +292,14 @@
         FAQ
       </h2>
 
-      <div class="faq" style="display:flex;">
+      <div class="faq" style="display:flex; flex-wrap: wrap;">
         <div class="faq-card">
           <h3>
             How big is the library?
           </h3>
           <p>
-            workflow-svg.js is small and light. It has only two other dependencies which you need to import.
+            workflow-svg.js is small and light - at the moment it is about 9 KB. 
+            It has only two other dependencies which you need to import.
           </p>
         </div>
 
@@ -310,6 +311,46 @@
             workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
           </p>
         </div>
+
+        <div class="faq-card">
+          <h3>
+            Which browsers are supported?
+          </h3>
+          <p>
+            The minified version (if you include polyfills) should work on IE11 and for all modern browsers.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Is it a complete editor? Can I change everything?
+          </h3>
+          <p>
+            workflow-svg.js is a component oriented library. 
+            You give data inside the component - make changes and can get the result back.
+            If you want to create workflow entities, for example - you have to do that outside of the library and pass it to the update method.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            What can I edit with worklfow-svg.js?
+          </h3>
+          <p> 
+            You can move entities and labels. You can connect entities with relationships. That is the main purpose of the library. To display data and make changes. But you can configure many other things that should be displayed or how things should behave.  
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Can I help?
+          </h3>
+          <p>
+            Yes of course, just contact me! You find more about the author on the github page. I do the project as a hobby and without any commercial support.
+          </p>
+        </div>
+
+        
 
       </div>
 

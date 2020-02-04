@@ -66,14 +66,14 @@ ul {
     padding: 2px;
 }
 
-#test, #test2, #test3{
+.example{
     border: #d9d9d9;
     border-style: dashed;
     border-width: 3px;
     position: relative;
 }
 
-.example{
+.example-label{
     position: absolute;
     right: 0px;
     background-color: #d9d9d9;

@@ -192,6 +192,84 @@
       "configuration":{"line_color":"#000000","arrow_type":"default", "readonly": true}
     });
 
+    var w4 = new WorkflowSVG();
+    w4.initalize("#test4", 300, 400);
+    w4.update({
+      entities:[
+        {id:'drag-me', text:'drag me - i will snap', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
+      ],
+      lines: [],
+      configuration: {
+        line_color: '#FEC0AA',
+        arrow_type: 'none',
+        grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
+        grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
+      }
+    });
+
+    var w5 = new WorkflowSVG();
+    w5.initalize("#test5", 300, 400);
+    w5.update({
+      entities:[
+        {id:'drag-me', text:'can always be displayed', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
+      ],
+      lines: [],
+      configuration: {
+        line_color: '#5D737E',
+        arrow_type: 'default',
+        grid_type: 'static',
+        grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#929292'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
+        grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#929292'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
+      }
+    });
+
+    var w6 = new WorkflowSVG();
+    w6.initalize("#test6", 300, 400);
+    w6.update({
+      entities:[
+        {id:'watch', text:'watch a...', x: 10, y: 170, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'movie', text:'movie', x: 200, y: 240, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'series', text:'series', x: 200, y: 100, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'or', text:'X', x: 120, y: 155, width: 50, height: 50, displaytype:'operation', backgroundcolor:'#0B3954', color: '#ffffff', radius: 0},
+      ],
+      lines: [{
+        id:'line-1',
+        from: {
+            element: "watch",
+            point: "right"
+        },
+        to: {
+            element: "or",
+            point: "left"
+        }
+      },{
+        id:'line-2',
+        from: {
+            element: "or",
+            point: "top"
+        },
+        to: {
+            element: "series",
+            point: "left"
+        }
+      },{
+        id:'line-3',
+        from: {
+            element: "or",
+            point: "bottom"
+        },
+        to: {
+            element: "movie",
+            point: "left"
+        }
+      }],
+      labels:[{value:'you have to decide...', x:80, y: 350}],
+      configuration: {
+        readonly:true,
+        line_color: '#053C5E',
+        arrow_type: 'default'
+      }
+    });
     </script>
 
     <div class="container">
@@ -205,7 +283,7 @@
       </div>
 
       <h1>workflow-svg.js</h1>
-      <div style="text-align:center; margin-top:80px">
+      <div style="text-align:center; margin-top:80px; margin-bottom: 40px;">
         <p style="color: #9b9b9b; font-family: 'Cormorant Garamond', serif; font-size: x-large;">The workflow editor you shouldn't miss</p>
         <img src="./workflow.png" width="100px"/>
       </div>
@@ -233,7 +311,7 @@
           <img src="example-2_.png" style="width:160px"/>
           <p>That is all: you have defined your first relationship between entities!</p>
         </div>
-        <div id="test" style="margin-left: 20px;" ><div class="example">Example</div></div>
+        <div id="test" class="example" style="margin-left: 20px;" ><div class="example-label">Example</div></div>
       </div>
       <h2>Customize to your needs</h2>
       <p>
@@ -252,7 +330,7 @@
       </p>
 
       <div class="container-with-columns">        
-        <div id="test3"><div class="example">Example</div></div>
+        <div id="test3" class="example"><div class="example-label">Example</div></div>
         <div style="margin-left: 20px;">
           <p>
             In this example you see different colors for the background of entities and their text and a different color for the relationships. The radius of the corners is smaller. 
@@ -267,6 +345,16 @@
         </div>
       </div>
 
+      <p>
+        Do you want to see more? Here are some other examples.
+      </p>
+
+      <div class="container-with-columns" style="flex-wrap: wrap; justify-content:space-between;">        
+        <div id="test4" class="example"><div class="example-label">Example</div></div>
+        <div id="test5" class="example"><div class="example-label">Example</div></div>
+        <div id="test6" class="example"><div class="example-label">Example</div></div>
+      </div>
+
       <div class="container-with-columns" style="margin-top: 40px;">        
         <div style="padding-right: 10px; margin-right: 20px;">
           <h2>How to configure</h2>     
@@ -279,8 +367,8 @@
             You will get the updated JSON that you can also use to build in workflow-svg.js.
           </p>
         </div>        
-        <div id="test2" >
-          <div class="example">Example</div>
+        <div id="test2" class="example">
+          <div class="example-label">Example</div>
         </div>
       </div>
       <div>

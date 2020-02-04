@@ -43,6 +43,7 @@ The JSON contains of three fields.
 |---|---|---|
 | entities | array | Entities of a workflow.|
 | lines | array | Lines between the entities.|
+| labels | array | Some labels to display.|
 | configuration | object| Defines some configuration that will be applied to the whole chart.|
 
 The fields are explained now into more detail.
@@ -69,6 +70,17 @@ One line in the array contains the following attributes:
 |id| string | Unique id of the line|
 |from| object| Object that contains: <br>- 'element' - the id from the source entity, <br>- 'point' - where the line starts at this entity (top, right, bottom, left)|
 |to| object| Object that contains: <br>- 'element' - the id from the target entity, <br>- 'point' - where the line ends at this entity (top, right, bottom, left)|
+
+### labels
+One label in the array contains the following attributes:
+
+|Attribute| Type| Description|
+|---|---|---|
+|id| string | Unique id of the label|
+|value| string| The text of the label|
+|x| integer | X coordinate of the label |
+|y| integer | Y coordinate of the label |
+|color| string(hex) | Font Color of the label |
 
 ### configuration
 The configuration contains the following attributes:

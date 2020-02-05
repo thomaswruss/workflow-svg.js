@@ -33,6 +33,7 @@ Create a new *workflow-svg.js* instance with `new WorkflowSVG();`. The object ha
 |entity:clicked| Event when some entity was clicked|
 |line:added| Event when a line was added between some entity|
 |line:clicked| Event when some line was clicked|
+| label:moved | Event when some label was moved|
 
 You always get the ID of the related entity/line.
 

@@ -84,6 +84,8 @@ ul {
 #json{
     height: 300px;
     overflow-y: scroll;
+    background-color: #f1f1f1;
+    padding: 20px;
 }
 
 .button{

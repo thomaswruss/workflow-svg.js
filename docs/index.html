@@ -6,10 +6,10 @@
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/polyfillsIE.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@0.0.4/lib/workflow-svg.minified.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@0.0.4/lib/workflow-svg.minified.min.js"></script> -->
   
   <!--use this one if you want to test some code-->
-  <!-- <script src="./../src/workflow-svg.js"></script> -->
+  <script src="./../src/workflow-svg.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap" rel="stylesheet">
@@ -48,101 +48,103 @@
     });
 
     w2.update({
-  "entities": [
-    {
-      "id": "new",
-      "text": "new",
-      "x": 10,
-      "y": 222,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#118FA3",
-      "color": "#ffffff",
-      "radius": 2,
-      "class": "active",
-      "displaytype": "entity"
-    },
-    {
-      "id": "in-progress",
-      "text": "in progress",
-      "x": 160,
-      "y": 100,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#FFD044",
-      "color": "#ffffff",
-      "radius": 2,
-      "displaytype": "entity"
-    },
-    {
-      "id": "finished",
-      "text": "finished",
-      "x": 310,
-      "y": 100,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#BCBF00",
-      "color": "#ffffff",
-      "radius": 2,
-      "displaytype": "entity"
-    },
-    {
-      "id": "x",
-      "text": "x",
-      "displaytype": "operation",
-      "x": 171.5,
-      "y": 213.5,
-      "width": 40,
-      "height": 40,
-      "backgroundcolor": "#666666",
-      "color": "#ffffff",
-      "radius": 2
-    }
-  ],
-  "lines": [
-    {
-      "id": "line-0",
-      "from": {
-        "element": "in-progress",
-        "point": "right"
-      },
-      "to": {
-        "element": "finished",
-        "point": "left"
+      "entities": [
+        {
+          "id": "new",
+          "text": "new",
+          "x": 10,
+          "y": 222,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#118FA3",
+          "color": "#ffffff",
+          "radius": 2,
+          "class": "active",
+          "displaytype": "entity"
+        },
+        {
+          "id": "in-progress",
+          "text": "in progress",
+          "x": 160,
+          "y": 100,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#FFD044",
+          "color": "#ffffff",
+          "radius": 2,
+          "displaytype": "entity"
+        },
+        {
+          "id": "finished",
+          "text": "finished",
+          "x": 310,
+          "y": 100,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#BCBF00",
+          "color": "#ffffff",
+          "radius": 2,
+          "displaytype": "entity"
+        },
+        {
+          "id": "x",
+          "text": "x",
+          "displaytype": "operation",
+          "x": 171.5,
+          "y": 213.5,
+          "width": 40,
+          "height": 40,
+          "backgroundcolor": "#666666",
+          "color": "#ffffff",
+          "radius": 2
+        }
+      ],
+      "lines": [
+        {
+          "id": "line-0",
+          "from": {
+            "element": "in-progress",
+            "point": "right"
+          },
+          "to": {
+            "element": "finished",
+            "point": "left"
+          }
+        },
+        {
+          "id": "line-1",
+          "from": {
+            "element": "x",
+            "point": "top"
+          },
+          "to": {
+            "element": "in-progress",
+            "point": "bottom"
+          }
+        },
+        {
+          "id": "line-2",
+          "from": {
+            "element": "x",
+            "point": "right"
+          },
+          "to": {
+            "element": "finished",
+            "point": "bottom"
+          }
+        }
+      ],
+      "labels":[{id:'a1',value:'🡹 connect them', x:110, y: 310, color:'#d9d9d9'}],
+      "configuration": {
+        "line_color": "#000000",
+        "arrow_type": "default",
+        "readonly": false
       }
-    },
-    {
-      "id": "line-1",
-      "from": {
-        "element": "x",
-        "point": "top"
-      },
-      "to": {
-        "element": "in-progress",
-        "point": "bottom"
-      }
-    },
-    {
-      "id": "line-2",
-      "from": {
-        "element": "x",
-        "point": "right"
-      },
-      "to": {
-        "element": "finished",
-        "point": "bottom"
-      }
-    }
-  ],
-  "configuration": {
-    "line_color": "#000000",
-    "arrow_type": "default",
-    "readonly": false
-  }
-});
+    });
 
     w2.register('entity:moved', callback);
     w2.register('line:added', callback);
+    w2.register('label:moved', callback);
 
     var w3 = new WorkflowSVG();
     w3.initalize("#test3", 500, 400);
@@ -363,7 +365,7 @@
             This is very usefull - you have controll over everything all the time. 
           </p>
           <p>
-            Change something in the diagram (e.g. connect "new" and "in progress"). 
+            Change something in the diagram (e.g. connect <span><img src="./entity_new.png" height="20"></span> and <span><img src="./entity_x.png" height="20"></span>). 
             You will get the updated JSON that you can also use to build in workflow-svg.js.
           </p>
         </div>        
@@ -373,7 +375,7 @@
       </div>
       <div>
         <p>Output:</p>
-        <pre id="json">...change something on the left side</pre>
+        <pre id="json">...change something to see the result here</pre>
       </div>
 
       <h2>

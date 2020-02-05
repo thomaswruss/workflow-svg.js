@@ -43,6 +43,7 @@ The JSON contains of three fields.
 |---|---|---|
 | entities | array | Entities of a workflow.|
 | lines | array | Lines between the entities.|
+| labels | array | Some labels to display.|
 | configuration | object| Defines some configuration that will be applied to the whole chart.|
 
 The fields are explained now into more detail.
@@ -58,6 +59,7 @@ One entity in the array contains the following attributes:
 |y| integer | Y coordinate of the entity |
 |backgroundcolor| string(hex) | Background Color of the entity|
 |color| string(hex) | Font Color of the entity |
+|faicon|string|Class Name for Font Awesome 4 or 5 (they have to be imported separately)|
 |radius| integer| Radius of the corners of the entity |
 |class|string|Class Name for css styling|
 
@@ -70,6 +72,17 @@ One line in the array contains the following attributes:
 |from| object| Object that contains: <br>- 'element' - the id from the source entity, <br>- 'point' - where the line starts at this entity (top, right, bottom, left)|
 |to| object| Object that contains: <br>- 'element' - the id from the target entity, <br>- 'point' - where the line ends at this entity (top, right, bottom, left)|
 
+### labels
+One label in the array contains the following attributes:
+
+|Attribute| Type| Description|
+|---|---|---|
+|id| string | Unique id of the label|
+|value| string| The text of the label|
+|x| integer | X coordinate of the label |
+|y| integer | Y coordinate of the label |
+|color| string(hex) | Font Color of the label |
+
 ### configuration
 The configuration contains the following attributes:
 
@@ -78,3 +91,8 @@ The configuration contains the following attributes:
 | line_color | string(hex) | Color of all lines| '#000000' (=black) |
 | arrow_type | 'default' or 'none'| At the moment there are only two arrow type: default or none| 'default'|
 | readonly | boolean |If true, the chart will be readonly| false |
+| grid_type | 'static' or 'dynamic' | If 'static' - grid lines will always be shown. Otherwise the grid line will only be shown if the dragged entity is near enough -tjis is called 'dynamic'. | 'dynamic' |
+| grid_x | array | Array of objects <br> - 'value': the x coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] | 
+| grid_y | array | Array of objects <br> - 'value': the y coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] |
+
+The configuration is completely optional. All non-existent values ​​are set automatically.

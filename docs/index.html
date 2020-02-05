@@ -6,17 +6,22 @@
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/polyfillsIE.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@0.0.4/lib/workflow-svg.minified.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@1.0.0/dist/workflow-svg.minified.min.js"></script>
   
   <!--use this one if you want to test some code-->
   <!-- <script src="./../src/workflow-svg.js"></script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css">
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+
     <script>
 
     var callback = function(){
@@ -43,111 +48,113 @@
     });
 
     w2.update({
-  "entities": [
-    {
-      "id": "new",
-      "text": "new",
-      "x": 10,
-      "y": 222,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#118FA3",
-      "color": "#ffffff",
-      "radius": 2,
-      "class": "active",
-      "displaytype": "entity"
-    },
-    {
-      "id": "in-progress",
-      "text": "in progress",
-      "x": 160,
-      "y": 100,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#FFD044",
-      "color": "#ffffff",
-      "radius": 2,
-      "displaytype": "entity"
-    },
-    {
-      "id": "finished",
-      "text": "finished",
-      "x": 310,
-      "y": 100,
-      "width": 100,
-      "height": 60,
-      "backgroundcolor": "#BCBF00",
-      "color": "#ffffff",
-      "radius": 2,
-      "displaytype": "entity"
-    },
-    {
-      "id": "x",
-      "text": "x",
-      "displaytype": "operation",
-      "x": 171.5,
-      "y": 213.5,
-      "width": 40,
-      "height": 40,
-      "backgroundcolor": "#666666",
-      "color": "#ffffff",
-      "radius": 2
-    }
-  ],
-  "lines": [
-    {
-      "id": "line-0",
-      "from": {
-        "element": "in-progress",
-        "point": "right"
-      },
-      "to": {
-        "element": "finished",
-        "point": "left"
+      "entities": [
+        {
+          "id": "new",
+          "text": "new",
+          "x": 10,
+          "y": 222,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#118FA3",
+          "color": "#ffffff",
+          "radius": 2,
+          "class": "active",
+          "displaytype": "entity"
+        },
+        {
+          "id": "in-progress",
+          "text": "in progress",
+          "x": 160,
+          "y": 100,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#FFD044",
+          "color": "#ffffff",
+          "radius": 2,
+          "displaytype": "entity"
+        },
+        {
+          "id": "finished",
+          "text": "finished",
+          "x": 310,
+          "y": 100,
+          "width": 100,
+          "height": 60,
+          "backgroundcolor": "#BCBF00",
+          "color": "#ffffff",
+          "radius": 2,
+          "displaytype": "entity"
+        },
+        {
+          "id": "x",
+          "text": "x",
+          "displaytype": "operation",
+          "x": 171.5,
+          "y": 213.5,
+          "width": 40,
+          "height": 40,
+          "backgroundcolor": "#666666",
+          "color": "#ffffff",
+          "radius": 2
+        }
+      ],
+      "lines": [
+        {
+          "id": "line-0",
+          "from": {
+            "element": "in-progress",
+            "point": "right"
+          },
+          "to": {
+            "element": "finished",
+            "point": "left"
+          }
+        },
+        {
+          "id": "line-1",
+          "from": {
+            "element": "x",
+            "point": "top"
+          },
+          "to": {
+            "element": "in-progress",
+            "point": "bottom"
+          }
+        },
+        {
+          "id": "line-2",
+          "from": {
+            "element": "x",
+            "point": "right"
+          },
+          "to": {
+            "element": "finished",
+            "point": "bottom"
+          }
+        }
+      ],
+      "labels":[{id:'a1',value:'🡹 connect them', x:110, y: 310, color:'#d9d9d9'}],
+      "configuration": {
+        "line_color": "#000000",
+        "arrow_type": "default",
+        "readonly": false
       }
-    },
-    {
-      "id": "line-1",
-      "from": {
-        "element": "x",
-        "point": "top"
-      },
-      "to": {
-        "element": "in-progress",
-        "point": "bottom"
-      }
-    },
-    {
-      "id": "line-2",
-      "from": {
-        "element": "x",
-        "point": "right"
-      },
-      "to": {
-        "element": "finished",
-        "point": "bottom"
-      }
-    }
-  ],
-  "configuration": {
-    "line_color": "#000000",
-    "arrow_type": "default",
-    "readonly": false
-  }
-});
+    });
 
     w2.register('entity:moved', callback);
     w2.register('line:added', callback);
+    w2.register('label:moved', callback);
 
     var w3 = new WorkflowSVG();
     w3.initalize("#test3", 500, 400);
 
     w3.update({
       "entities":[
-        {"id":"search","text":"search","x":20,"y":10,"width":100,"height":60,"backgroundcolor":"#ACFCD9","color":"#2F4858","radius":2},
-        {"id":"analyze","text":"analyze","x":20,"y":110,"width":100,"height":60,"backgroundcolor":"#5DD9C1","color":"#2F4858","radius":2},
-        {"id":"review","text":"review","x":20,"y":210,"width":100,"height":60,"backgroundcolor":"#98C1D9","color":"#2F4858","radius":2},
-        {"id":"useit","text":"use it","x":20,"y":310,"width":100,"height":60,"backgroundcolor":"#4F7CAC","color":"#F0F7EE","radius":2}
+        {"id":"search","text":"search", "faicon": "fa fa-search","x":20,"y":10,"width":100,"height":60,"backgroundcolor":"#ACFCD9","color":"#2F4858","radius":2},
+        {"id":"analyze","text":"analyze", "faicon":"fa fa-flask", "x":20,"y":110,"width":100,"height":60,"backgroundcolor":"#5DD9C1","color":"#2F4858","radius":2},
+        {"id":"review","text":"review", "faicon":"fa fa-pencil-square-o", "x":20,"y":210,"width":100,"height":60,"backgroundcolor":"#98C1D9","color":"#2F4858","radius":2},
+        {"id":"useit","text":"use it", "faicon":"fa fa-check", "x":20,"y":310,"width":100,"height":60,"backgroundcolor":"#4F7CAC","color":"#F0F7EE","radius":2}
       ],
       "lines": [
         {
@@ -187,6 +194,83 @@
       "configuration":{"line_color":"#000000","arrow_type":"default", "readonly": true}
     });
 
+    var w4 = new WorkflowSVG();
+    w4.initalize("#test4", 300, 400);
+    w4.update({
+      entities:[
+        {id:'drag-me', text:'drag me - i will snap', "faicon":"fa fa-arrows", x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
+      ],
+      lines: [],
+      configuration: {
+        line_color: '#FEC0AA',
+        arrow_type: 'none',
+        grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
+        grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
+      }
+    });
+
+    var w5 = new WorkflowSVG();
+    w5.initalize("#test5", 300, 400);
+    w5.update({
+      entities:[
+        {id:'drag-me', text:'can always be displayed', "faicon":"fa fa-arrows",  x: 40, y: 170, width: 220, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
+      ],
+      lines: [],
+      configuration: {
+        line_color: '#5D737E',
+        arrow_type: 'default',
+        grid_type: 'static',
+        grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#929292'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
+        grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#929292'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
+      }
+    });
+
+    var w6 = new WorkflowSVG();
+    w6.initalize("#test6", 300, 400);
+    w6.update({
+      entities:[
+        {id:'watch', text:'watch a...', x: 5, y: 170, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'movie', text:'movie', x: 195, y: 240, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'series', text:'series', x: 195, y: 100, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'or', text:'X', x: 115, y: 155, width: 50, height: 50, displaytype:'operation', backgroundcolor:'#0B3954', color: '#ffffff', radius: 0},
+      ],
+      lines: [{
+        id:'line-1',
+        from: {
+            element: "watch",
+            point: "right"
+        },
+        to: {
+            element: "or",
+            point: "left"
+        }
+      },{
+        id:'line-2',
+        from: {
+            element: "or",
+            point: "top"
+        },
+        to: {
+            element: "series",
+            point: "left"
+        }
+      },{
+        id:'line-3',
+        from: {
+            element: "or",
+            point: "bottom"
+        },
+        to: {
+            element: "movie",
+            point: "left"
+        }
+      }],
+      labels:[{value:'you have to decide...', x:80, y: 350, color:'#0B3954'}],
+      configuration: {
+        line_color: '#053C5E',
+        arrow_type: 'default'
+      }
+    });
     </script>
 
     <div class="container">
@@ -200,71 +284,166 @@
       </div>
 
       <h1>workflow-svg.js</h1>
-      <p>
-        workflow-svg.js is an easy to use library to visualize an workflow and to adapt it. Just try it! 
-      </p> 
+      <div style="text-align:center; margin-top:80px; margin-bottom: 40px;">
+        <p style="color: #9b9b9b; font-family: 'Cormorant Garamond', serif; font-size: x-large;">The workflow editor you shouldn't miss</p>
+        <img src="./workflow.png" width="100px"/>
+      </div>
 
-      <div style="display:flex; margin-bottom:20px;">
-        <div id="test"><div class="example">Example</div></div>
-        <div style="margin-left: 20px;">
+      <p style="padding: 10px; margin-bottom: 30px;">
+        workflow-svg.js is an easy to use library to visualize a workflow and to adapt it. 
+        It is very customizable for your own requirements. Learn more about it and try the exciting examples.
+      </p>
+
+      <div class="container-with-columns">
+        <div >
+          <h2>The first try</h2>
           <p>
-            You can drag and drop the workflow entities. 
+            Here is a simple example: you can easily move the workflow entities using "drag and drop".
+          </p>
+          <p>
+            You can define relationships between workflow entities. It's very easy.
             On the edges of a entity you can create a line to another entity. 
             Just select the starting point ...
           </p>
           <img src="example-1_.png" style="width:120px"/>
           <p>
-            ... and then select the target point. That is all!
+            ... and then select the target point.
           </p>
-          <img src="example-2_.png" style="width:120px"/>
+          <img src="example-2_.png" style="width:160px"/>
+          <p>That is all: you have defined your first relationship between entities!</p>
         </div>
-
+        <div id="test" class="example" style="margin-left: 20px;" ><div class="example-label">Example</div></div>
       </div>
+      <h2>Customize to your needs</h2>
       <p>
-            Define your workflow with a simple JSON. You can configure and define your entities and lines and operations between entities. 
-            You can define different types, colors, size and even classes to apply your style from a css.
+        workflow-svg.js is designed to give you the power to customize it to your needs. 
+        You can define 
+        <ul>
+          <li>workflow entities,</li> 
+          <li>relationships between them (even more complex) and</li> 
+          <li>document it with labels.</li> 
+        </ul>
+        You can set different types, colors, size and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too (readonly, dynamic grid, static grid). 
       </p>
-      <p>
+
+      <p style="margin-bottom: 30px;">
         <a class="button-secondary" href="https://github.com/thomaswruss/workflow-svg.js">See documentation</a>
       </p>
 
-      <div style="display:flex; margin-bottom:20px;">
+      <div class="container-with-columns">        
+        <div id="test3" class="example"><div class="example-label">Example</div></div>
+        <div style="margin-left: 20px;">
+          <p>
+            In this example you see different colors for the background of entities and their text and a different color for the relationships. 
+            The radius of the corners is smaller. Entities have icons: Font Awesome 4 and 5 icons are supported.
+          </p>
+          <p>
+            The SVG is in "read-only" mode. Just add 
+            <span class="code">"readonly": true</span> in the config and no actions can be done anymore.
+          </p>
+          <p>
+            This is just a small example of what you can do with it.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Do you want to see more? Here are some other examples.
+      </p>
+
+      <div class="container-with-columns" style="flex-wrap: wrap; justify-content:space-between;">        
+        <div id="test4" class="example"><div class="example-label">Example</div></div>
+        <div id="test5" class="example"><div class="example-label">Example</div></div>
+        <div id="test6" class="example"><div class="example-label">Example</div></div>
+      </div>
+
+      <div class="container-with-columns" style="margin-top: 40px;">        
         <div style="padding-right: 10px; margin-right: 20px;">
-          
+          <h2>How to configure</h2>     
           <p>
-            Try to connect "new" and "in progress" and see the result as a JSON. 
+            With workflow-svg.js you can track the changes at any time using callbacks and events. 
+            This is very usefull - you have controll over everything all the time. 
           </p>
-          <p>Output:</p>
-          <pre id="json">...change something on the left side</pre>
+          <p>
+            Change something in the diagram (e.g. connect <span><img src="./entity_new.png" height="20"></span> and <span><img src="./entity_x.png" height="20"></span>). 
+            You will get the updated JSON that you can also use to build in workflow-svg.js.
+          </p>
+        </div>        
+        <div id="test2" class="example">
+          <div class="example-label">Example</div>
         </div>
-        <div>
-        <div id="test2"><div class="example">Example</div></div>
-          
-        </div>
+      </div>
+      <div>
+        <p>Output:</p>
+        <pre id="json">...change something to see the result here</pre>
       </div>
 
-      <div style="display:flex; margin-bottom:20px;">        
-        <div id="test3"><div class="example">Example</div></div>
-        <div style="margin-left: 20px;">     
+      <h2>
+        FAQ
+      </h2>
+
+      <div class="faq" style="display:flex; flex-wrap: wrap;">
+        <div class="faq-card">
+          <h3>
+            How big is the library?
+          </h3>
           <p>
-            You can use workflow-svg.js in "read-only" mode too. Just add 
-            <span class="code">"readonly": true</span> in the config.
+            workflow-svg.js is small and light - at the moment it is about 9 KB. 
+            It has only two other dependencies which you need to import.
           </p>
         </div>
+
+        <div class="faq-card">
+          <h3>
+            Is it complex to learn? 
+          </h3>
+          <p>
+            workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Which browsers are supported?
+          </h3>
+          <p>
+            The minified version (if you include polyfills) should work on IE11 and for all modern browsers.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Is it a complete editor? Can I change everything?
+          </h3>
+          <p>
+            workflow-svg.js is a component oriented library. 
+            You give data inside the component - make changes and can get the result back.
+            If you want to create workflow entities, for example - you have to do that outside of the library and pass it to the update method.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            What can I edit with worklfow-svg.js?
+          </h3>
+          <p> 
+            You can move entities and labels. You can connect entities with relationships. That is the main purpose of the library. To display data and make changes. But you can configure many other things that should be displayed or how things should behave.  
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3>
+            Can I help?
+          </h3>
+          <p>
+            Yes of course, just contact me! You find more about the author on the github page. I do the project as a hobby and without any commercial support.
+          </p>
+        </div>
+
+        
+
       </div>
 
-      <div style="display:flex; flex-wrap: wrap; align-items: center; margin-top:20px;">
-        <div class="circle">2</div>
-        <p>
-          workflow-svg.js is small and light. It has only two other dependencies which you need to import.
-        </p>
-      </div>
-      <div style="display:flex; flex-wrap: wrap; align-items: center; margin-top:20px;">
-        <div class="circle">4</div>
-        <p>
-          workflow-svg.js is easy to use. It has just 4 methods. Simple but usefull.
-        </p>
-      </div>
       <div style="text-align: center; padding-top:50px;">
         <a class="button" href="https://github.com/thomaswruss/workflow-svg.js">GET IT NOW</a>
       </div>

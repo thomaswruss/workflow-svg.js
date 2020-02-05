@@ -1,8 +1,8 @@
 {
   "name": "workflow-svg.js",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "",
-  "main": "./lib/workflow-svg.minified.js",
+  "main": "./dist/workflow-svg.minified.js",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@svgdotjs/svg.draggable.js": "^3.0.2",
@@ -16,8 +16,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:raw": "cp src/workflow-svg.js lib/workflow-svg.js",
-    "build:minified": "./node_modules/.bin/babel src/workflow-svg.js --out-file lib/workflow-svg.minified.js",
+    "build:raw": "cp src/workflow-svg.js dist/workflow-svg.js",
+    "build:minified": "./node_modules/.bin/babel src/workflow-svg.js --out-file dist/workflow-svg.minified.js",
     "build": "npm run-script build:raw && npm run-script build:minified"
   },
   "author": "Thomas Wruß",

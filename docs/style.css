@@ -13,6 +13,14 @@ body{
     float: right;
 }
 
+
+.container-with-columns{
+    display:flex; 
+    flex-wrap:wrap;
+    align-items:flex-start;
+    margin-bottom:20px;
+}
+
 @media only screen and (min-width: 600px) {
 
     .github-badge{
@@ -25,6 +33,10 @@ body{
         margin-right: auto;
         width: 1000px;
     }
+
+    .container-with-columns{
+        flex-wrap: nowrap;
+    }
 }
 
 h1{
@@ -33,8 +45,19 @@ h1{
     padding: 20px;
 }
 
+h2{
+    background-color: #ffd523;
+    margin: 0px;
+    padding: 20px;
+}
+
 p{
     padding: 5px;
+    line-height: 2;
+}
+
+ul {
+    line-height: 2;
 }
 
 .code{
@@ -43,14 +66,14 @@ p{
     padding: 2px;
 }
 
-#test, #test2, #test3{
+.example{
     border: #d9d9d9;
     border-style: dashed;
     border-width: 3px;
     position: relative;
 }
 
-.example{
+.example-label{
     position: absolute;
     right: 0px;
     background-color: #d9d9d9;
@@ -61,6 +84,8 @@ p{
 #json{
     height: 300px;
     overflow-y: scroll;
+    background-color: #f1f1f1;
+    padding: 20px;
 }
 
 .button{
@@ -93,16 +118,18 @@ p{
     background-color: #ffd523;
 }
 
-.circle{
-    width:50px; 
-    height: 50px; 
-    flex: 0 0 50px;
-    border-radius:50%; 
-    background-color: #9b9b9b; 
-    text-align: center;
-    line-height: 50px;
-    color:white;
-    display: inline-block;
+.faq{
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 10px;
+}
+
+.faq-card{
+    background-color: #fff2bb;
+    justify-content: center; 
+    padding: 10px;
+    margin: 10px;
+    flex-basis: 300px;
 }
 
 .footer{

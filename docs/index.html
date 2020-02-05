@@ -16,8 +16,8 @@
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css">
 
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -151,10 +151,10 @@
 
     w3.update({
       "entities":[
-        {"id":"search","text":"search","x":20,"y":10,"width":100,"height":60,"backgroundcolor":"#ACFCD9","color":"#2F4858","radius":2},
-        {"id":"analyze","text":"analyze","x":20,"y":110,"width":100,"height":60,"backgroundcolor":"#5DD9C1","color":"#2F4858","radius":2},
-        {"id":"review","text":"review","x":20,"y":210,"width":100,"height":60,"backgroundcolor":"#98C1D9","color":"#2F4858","radius":2},
-        {"id":"useit","text":"use it","x":20,"y":310,"width":100,"height":60,"backgroundcolor":"#4F7CAC","color":"#F0F7EE","radius":2}
+        {"id":"search","text":"search", "faicon": "fa fa-search","x":20,"y":10,"width":100,"height":60,"backgroundcolor":"#ACFCD9","color":"#2F4858","radius":2},
+        {"id":"analyze","text":"analyze", "faicon":"fa fa-flask", "x":20,"y":110,"width":100,"height":60,"backgroundcolor":"#5DD9C1","color":"#2F4858","radius":2},
+        {"id":"review","text":"review", "faicon":"fa fa-pencil-square-o", "x":20,"y":210,"width":100,"height":60,"backgroundcolor":"#98C1D9","color":"#2F4858","radius":2},
+        {"id":"useit","text":"use it", "faicon":"fa fa-check", "x":20,"y":310,"width":100,"height":60,"backgroundcolor":"#4F7CAC","color":"#F0F7EE","radius":2}
       ],
       "lines": [
         {
@@ -198,7 +198,7 @@
     w4.initalize("#test4", 300, 400);
     w4.update({
       entities:[
-        {id:'drag-me', text:'drag me - i will snap', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
+        {id:'drag-me', text:'drag me - i will snap', "faicon":"fa fa-arrows", x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
       ],
       lines: [],
       configuration: {
@@ -213,7 +213,7 @@
     w5.initalize("#test5", 300, 400);
     w5.update({
       entities:[
-        {id:'drag-me', text:'can always be displayed', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
+        {id:'drag-me', text:'can always be displayed', "faicon":"fa fa-arrows",  x: 40, y: 170, width: 220, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
       ],
       lines: [],
       configuration: {
@@ -229,10 +229,10 @@
     w6.initalize("#test6", 300, 400);
     w6.update({
       entities:[
-        {id:'watch', text:'watch a...', x: 10, y: 170, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
-        {id:'movie', text:'movie', x: 200, y: 240, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
-        {id:'series', text:'series', x: 200, y: 100, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
-        {id:'or', text:'X', x: 120, y: 155, width: 50, height: 50, displaytype:'operation', backgroundcolor:'#0B3954', color: '#ffffff', radius: 0},
+        {id:'watch', text:'watch a...', x: 5, y: 170, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'movie', text:'movie', x: 195, y: 240, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'series', text:'series', x: 195, y: 100, width: 100, height: 60, backgroundcolor:'#087E8B', color: '#ffffff', radius: 0},
+        {id:'or', text:'X', x: 115, y: 155, width: 50, height: 50, displaytype:'operation', backgroundcolor:'#0B3954', color: '#ffffff', radius: 0},
       ],
       lines: [{
         id:'line-1',
@@ -265,9 +265,8 @@
             point: "left"
         }
       }],
-      labels:[{value:'you have to decide...', x:80, y: 350}],
+      labels:[{value:'you have to decide...', x:80, y: 350, color:'#0B3954'}],
       configuration: {
-        readonly:true,
         line_color: '#053C5E',
         arrow_type: 'default'
       }
@@ -324,7 +323,7 @@
           <li>relationships between them (even more complex) and</li> 
           <li>document it with labels.</li> 
         </ul>
-        You can set different types, colors, size and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too. 
+        You can set different types, colors, size and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too (readonly, dynamic grid, static grid). 
       </p>
 
       <p style="margin-bottom: 30px;">
@@ -335,14 +334,15 @@
         <div id="test3" class="example"><div class="example-label">Example</div></div>
         <div style="margin-left: 20px;">
           <p>
-            In this example you see different colors for the background of entities and their text and a different color for the relationships. The radius of the corners is smaller. 
+            In this example you see different colors for the background of entities and their text and a different color for the relationships. 
+            The radius of the corners is smaller. Entities have icons: Font Awesome 4 and 5 icons are supported.
           </p>
           <p>
             The SVG is in "read-only" mode. Just add 
-            <span class="code">"readonly": true</span> in the config and no changes can be done.
+            <span class="code">"readonly": true</span> in the config and no actions can be done anymore.
           </p>
           <p>
-            This is just a small part of the possibilities you can do with it.
+            This is just a small example of what you can do with it.
           </p>
         </div>
       </div>

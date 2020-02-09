@@ -60,7 +60,7 @@ One entity in the array contains the following attributes:
 |y| integer | Y coordinate of the entity |
 |backgroundcolor| string(hex) | Background Color of the entity|
 |color| string(hex) | Font Color of the entity |
-|faicon|string|Class Name for Font Awesome 4 or 5 (they have to be imported separately)|
+|faicon|string|Class Name for Font Awesome 4 or 5 (they have to be imported separately, Firefox is not supported yet)|
 |radius| integer| Radius of the corners of the entity |
 |class|string|Class Name for css styling|
 

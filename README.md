@@ -1,20 +1,22 @@
 # workflow-svg.js
 *workflow-svg.js* is a JS Library to present and edit workflows as SVG. You can move entities and define connections between them. It is simple to include and configure it for your project. Take a look at a real example on [https://thomaswruss.github.io/workflow-svg.js/](https://thomaswruss.github.io/workflow-svg.js/).
 
-## How to import
-*workflow-svg.js* is a self containing library and has some requirements that has to be imported first:
-* svg.js (@svgdotjs/svg.js@3.0/dist/svg.min.js)
-* svg.draggable.js (@svgdotjs/svg.draggable.js/dist/svg.draggable.js)
+## How to include
+Install the library with `npm i workflow-svg.js`. That is all.
 
-If you want to be compatible with IE11 you have to import svg.js Polyfills at the beginning:
-* @svgdotjs/svg.js@3.0/dist/polyfills.js
-* @svgdotjs/svg.js@3.0/dist/polyfillsIE.js 
+With the installation, two additional libraries will be installed. Import them first:
+* svg.js: `<script src="./node_modules/@svgdotjs/svg.js/dist/svg.min.js"></script>`
+* svg.draggable.js `<script src="./node_modules/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>`
+
+If you want to be compatible with IE11 you have to import svg.js Polyfills too:
+* `<script src="./node_modules/@svgdotjs/svg.js/dist/polyfills.js"></script>` 
+* `<script src="./node_modules/@svgdotjs/svg.js/dist/polyfillsIE.js"></script>`
 
 And of course you have to import the library itself:
 
-`<script src="./node_modules/workflow-svg.js@0.0.1/lib/workflow-svg.minified.js"></script>`
+`<script src="./node_modules/workflow-svg.js@1.0.0/dist/workflow-svg.minified.js"></script>`
 
-In `./docs/index.html` and `./test.html` you can find examples how to include, call and work with the library.
+In `./docs/index.html` you can find examples how to include, call and work with the library.
 
 ## How to use
 

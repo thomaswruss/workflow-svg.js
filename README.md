@@ -14,7 +14,7 @@ If you want to be compatible with IE11 you have to import svg.js Polyfills too:
 
 And of course you have to import the library itself:
 
-`<script src="./node_modules/workflow-svg.js@1.0.0/dist/workflow-svg.minified.js"></script>`
+`<script src="./node_modules/workflow-svg.js/dist/workflow-svg.minified.js"></script>`
 
 In `./docs/index.html` you can find examples how to include, call and work with the library.
 

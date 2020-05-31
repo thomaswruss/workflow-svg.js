@@ -1,6 +1,6 @@
 {
   "name": "workflow-svg.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "main": "./dist/workflow-svg.minified.js",
   "dependencies": {
@@ -21,5 +21,6 @@
     "build": "npm run-script build:raw && npm run-script build:minified"
   },
   "author": "Thomas Wruß",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["js", "svg", "workflow", "editor", "configurable", "edit-workflows", "workflow-svg", "workflow-management"]
 }

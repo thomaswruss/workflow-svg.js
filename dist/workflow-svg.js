@@ -533,7 +533,7 @@ var WorkflowSVG = (function () {
         _draw.entities.forEach(entity => entity.remove());
         _draw.entities = [];
 
-        _lines.forEach(arrow => arrow.remove());
+        _draw.lines.children().forEach(arrow => arrow.remove());
         _lines = [];
 
         _draw.grid.x.forEach(x => x.line.remove());
@@ -655,3 +655,6 @@ var WorkflowSVG = (function () {
         get: get
     }
 });
+
+var module = module || {}; 
+module.exports=WorkflowSVG;

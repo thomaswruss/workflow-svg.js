@@ -132,6 +132,13 @@ ul {
     flex-basis: 300px;
 }
 
+.faq-card-large{
+    background-color: #fff2bb;
+    justify-content: center; 
+    padding: 10px;
+    margin: 10px;
+}
+
 .footer{
     background-color: #ffd523;
     margin-top: 40px;

@@ -4,14 +4,14 @@
   "description": "",
   "main": "./dist/workflow-svg.minified.js",
   "dependencies": {
-    "@babel/polyfill": "^7.8.7",
+    "@babel/polyfill": "^7.12.1",
     "@svgdotjs/svg.draggable.js": "^3.0.2",
     "@svgdotjs/svg.js": "^3.0.16"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "babel-preset-minify": "^0.5.1"
   },
   "scripts": {
@@ -22,5 +22,14 @@
   },
   "author": "Thomas Wruß",
   "license": "MIT",
-  "keywords": ["js", "svg", "workflow", "editor", "configurable", "edit-workflows", "workflow-svg", "workflow-management"]
+  "keywords": [
+    "js",
+    "svg",
+    "workflow",
+    "editor",
+    "configurable",
+    "edit-workflows",
+    "workflow-svg",
+    "workflow-management"
+  ]
 }

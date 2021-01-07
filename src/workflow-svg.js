@@ -53,24 +53,34 @@ var WorkflowSVG = (function () {
             group.entity.attr("class", entity.class);
         }
 
-        var text = group.text(entity.text)
+        var text = group.plain(entity.text)
             .cx((entity.width/2))
             .cy(entity.height/2)
-            .attr({ fill: entity.color})
-            .font({
-                family: 'Helvetica'
-            });
+            .attr({ fill: entity.color});
 
-        if(entity.faicon && entity.faicon.length>0){
+        if(entity.fa_unicode && entity.fa_unicode.length>0){
             text.dx(10);
-
-            group.foreignObject(20, 20)
+                
+            group.icon = group.plain()
                 .cy(entity.height/2)
                 .x( entity.text.length>0 ? text.x()-20 : (entity.height/2)-10)
-                .add(SVG('<i class="'+entity.faicon+'" style="color:'+entity.color+'"></i>'));     
+                .attr({ fill: entity.color});
+
+            if(_json.configuration.font_awesome == 4){
+                group.icon.font({
+                    family: 'font_awesome'
+                });
+            }
+    
+            if(_json.configuration.font_awesome == 5){
+                group.icon.font({
+                    family: '"Font Awesome 5 Free"'
+                });
+            }
+
+            var faContentCode = entity.fa_unicode.startsWith('&#x') ? entity.fa_unicode : '&#x'+entity.fa_unicode+';';
+            group.icon.node.innerHTML = faContentCode;
         }
-
-
 
         group.arrows = group.group();
 
@@ -163,7 +173,6 @@ var WorkflowSVG = (function () {
         }
 
         group.move(entity.x-MARGIN, entity.y-MARGIN);
-
     }
 
     function _renderGrid() {

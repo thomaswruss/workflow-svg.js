@@ -43,9 +43,9 @@ var WorkflowSVG = (function () {
             .attr({ fill: entity.background_color })
             .radius(entity.radius);
 
-        group.entity.display_type = entity.display_type;
+        group.entity.type = entity.type;
 
-        if(entity.display_type==='operation'){
+        if(entity.type==='operation'){
             group.entity.transform({'rotate': 45, origin: 'center center'});
         }
 
@@ -89,7 +89,7 @@ var WorkflowSVG = (function () {
                             .cy((entity.height/2))
                             .attr({ opacity: '0', fill:'#FFBF00'});
 
-        if(entity.display_type==='operation'){
+        if(entity.type==='operation'){
             hoverArea.transform({'rotate': 45});
         }
         
@@ -500,7 +500,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateX(group, position){
-        var width = (group.entity.display_type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
+        var width = (group.entity.type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
 
         switch(position){
             case 'right':
@@ -514,7 +514,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateY(group, position){
-        var height = (group.entity.display_type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
+        var height = (group.entity.type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
 
         switch(position){
             case 'right':
@@ -598,9 +598,9 @@ var WorkflowSVG = (function () {
         }
 
         _json.entities.map(entity => {
-            entity.display_type = entity.display_type ? entity.display_type: 'entity';
+            entity.type = entity.type ? entity.type: 'entity';
 
-            if(entity.display_type==='operation'){
+            if(entity.type==='operation'){
                 entity.height = entity.width;
             }
         })

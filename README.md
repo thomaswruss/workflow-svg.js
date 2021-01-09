@@ -57,7 +57,7 @@ One entity in the array contains the following attributes:
 |---|---|---|
 |id| string | Unique id of the entity|
 |text| string | Text of the entity |
-|display_type| string | Type of entity. Default is 'entity'. For workflow operations use: 'operation' |
+|type| string | Type of entity. Default is 'entity'. For workflow operations use: 'operation' |
 |x| integer | X coordinate of the entity |
 |y| integer | Y coordinate of the entity |
 |background_color| string(hex) | Background Color of the entity|

@@ -62,7 +62,7 @@ One entity in the array contains the following attributes:
 |y| integer | Y coordinate of the entity |
 |backgroundcolor| string(hex) | Background Color of the entity|
 |color| string(hex) | Font Color of the entity |
-|faicon|string|Class Name for Font Awesome 4 or 5 (they have to be imported separately, Firefox is not supported yet)|
+|fa_unicode|string|Unicode for FontAwesome Icon (note: don't forget to specify which version of FontAwesome you use - see )|
 |radius| integer| Radius of the corners of the entity |
 |class|string|Class Name for css styling|
 
@@ -94,6 +94,7 @@ The configuration contains the following attributes:
 | line_color | string(hex) | Color of all lines| '#000000' (=black) |
 | arrow_type | 'default' or 'none'| At the moment there are only two arrow type: default or none| 'default'|
 | readonly | boolean |If true, the chart will be readonly| false |
+| font_awesome | integer | Version of Font Awesome that you want to use: 4 or 5 are allowed | undefined |
 | grid_type | 'static' or 'dynamic' | If 'static' - grid lines will always be shown. Otherwise the grid line will only be shown if the dragged entity is near enough -tjis is called 'dynamic'. | 'dynamic' |
 | grid_x | array | Array of objects <br> - 'value': the x coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] | 
 | grid_y | array | Array of objects <br> - 'value': the y coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] |

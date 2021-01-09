@@ -6,18 +6,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/polyfillsIE.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@1.1.0/dist/workflow-svg.minified.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/workflow-svg.js@2.0.0/dist/workflow-svg.minified.js"></script> -->
   
   <!--use this one if you want to test some code-->
-  <!-- <script src="./../src/workflow-svg.js"></script> -->
+  <script src="./../src/workflow-svg.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Zilla+Slab&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -36,15 +36,14 @@
     
     w.update({
       entities:[
-        {id:'first', text:'first', fa_unicode:'f007', x: 10, y: 10, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10},
+        {id:'first', text:'first', x: 10, y: 10, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10},
         {id:'second', text:'second', x: 125, y: 125, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10},
         {id:'third', text:'third', x: 250, y: 250, width: 100, height: 100, backgroundcolor:'#f06', color: '#ffffff', radius: 10}
       ],
       lines: [],
       configuration: {
         line_color: '#f06',
-        arrow_type: 'default',
-        font_awesome: 4
+        arrow_type: 'default'
       }
     });
 
@@ -199,12 +198,13 @@
     w4.initalize("#test4", 300, 400);
     w4.update({
       entities:[
-        {id:'drag-me', text:'drag me - i will snap', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
+        {id:'drag-me', text:'drag me - i will snap', fa_unicode:'f256', x: 50, y: 170, width: 200, height: 60, backgroundcolor:'#DD614A', color: '#FEC0AA', radius: 0},
       ],
       lines: [],
       configuration: {
         line_color: '#FEC0AA',
         arrow_type: 'none',
+        font_awesome: 5,
         grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
         grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
       }
@@ -214,12 +214,13 @@
     w5.initalize("#test5", 300, 400);
     w5.update({
       entities:[
-        {id:'drag-me', text:'can always be displayed',  x: 40, y: 170, width: 220, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
+        {id:'drag-me', text:'can always be displayed', fa_unicode:'f256', x: 40, y: 170, width: 220, height: 60, backgroundcolor:'#64B6AC', color: '#0D5C63', radius: 0},
       ],
       lines: [],
       configuration: {
         line_color: '#5D737E',
         arrow_type: 'default',
+        font_awesome: 5,
         grid_type: 'static',
         grid_x: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#929292'}, {value: 200, color: '#d9d9d9'}, {value: 250, color: '#d9d9d9'}],
         grid_y: [{value: 50, color: '#d9d9d9'}, {value: 100, color: '#d9d9d9'}, {value: 150, color: '#d9d9d9'}, {value: 200, color: '#929292'}, {value: 250, color: '#d9d9d9'}, {value: 300, color: '#d9d9d9'}, {value: 350, color: '#d9d9d9'}]
@@ -313,13 +314,22 @@
       <h2>Customize to your needs</h2>
       <p>
         workflow-svg.js is designed to give you the power to customize it to your needs. 
-        You can define 
+        You can define everything you need for a workflow chart:
         <ul>
           <li>workflow entities,</li> 
           <li>relationships between them (even more complex) and</li> 
-          <li>document it with labels.</li> 
+          <li>labels.</li> 
         </ul>
-        You can set different types, colors, size and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too (readonly, dynamic grid, static grid). 
+        You can customize according to your needs...
+        <ul>
+          <li>entity types,</li>
+          <li>colors,</li>
+          <li>size,</li>
+          <li>radius of the corners,</li>
+          <li>arrow types,</li>
+          <li>add icons (FontAwesome)</li>
+        </ul>
+        and if this is not enough: you can add css-classes to apply your style. Of course there are different modes too (readonly, dynamic grid, static grid). 
       </p>
 
       <p style="margin-bottom: 30px;">
@@ -338,7 +348,7 @@
             <span class="code">"readonly": true</span> in the config and no actions can be done anymore.
           </p>
           <p>
-            This is just a small example of what you can do with it.
+            This is just a small example of what you can do with workflow-svg.js.
           </p>
         </div>
       </div>

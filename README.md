@@ -100,3 +100,10 @@ The configuration contains the following attributes:
 | grid_y | array | Array of objects <br> - 'value': the y coordinate of the line <br> - 'width': width of the line <br> - 'color': color of the line | [] |
 
 The configuration is completely optional. All non-existent values ​​are set automatically.
+
+## Use [FontAwesome](https://fontawesome.com/) icons
+workflow-svg.js support [FontAwesome](https://fontawesome.com/) Icons in Version 4 and 5. What you need to do:
+* import FontAwesome CSS, e.g.: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">`
+* provide in the JSON (see chapter above) in the config part `font_awesome: 5` (or 4 if you imported version 4)
+* add on the entities the unicode of the FontAwesome Icon you want to use, e.g.: `fa_unicode:'f256'`
+  

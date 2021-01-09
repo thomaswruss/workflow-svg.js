@@ -30,7 +30,7 @@ var WorkflowSVG = (function () {
         _draw.entities.push(group);
 
         //assginment and default values for entities
-        entity.backgroundcolor = entity.backgroundcolor ? entity.backgroundcolor : '#f06';
+        entity.background_color = entity.background_color ? entity.background_color : '#f06';
         entity.color = entity.color ? entity.color : '#ffffff';
         entity.radius = entity.radius ? entity.radius : 0;
 
@@ -40,12 +40,12 @@ var WorkflowSVG = (function () {
         group.entity = group.rect(entity.width, entity.height)
             .cx((entity.width/2))
             .cy((entity.height/2))
-            .attr({ fill: entity.backgroundcolor })
+            .attr({ fill: entity.background_color })
             .radius(entity.radius);
 
-        group.entity.displaytype = entity.displaytype;
+        group.entity.display_type = entity.display_type;
 
-        if(entity.displaytype==='operation'){
+        if(entity.display_type==='operation'){
             group.entity.transform({'rotate': 45, origin: 'center center'});
         }
 
@@ -89,7 +89,7 @@ var WorkflowSVG = (function () {
                             .cy((entity.height/2))
                             .attr({ opacity: '0', fill:'#FFBF00'});
 
-        if(entity.displaytype==='operation'){
+        if(entity.display_type==='operation'){
             hoverArea.transform({'rotate': 45});
         }
         
@@ -101,7 +101,7 @@ var WorkflowSVG = (function () {
             .cy((entity.height/2))
             .attr({opacity: 0});
 
-        if(!_json.configuration.readonly){
+        if(!_json.configuration.read_only){
             draggableElement.draggable()
             .on('dragmove.namespace', (e) => {
                 e.preventDefault();
@@ -217,7 +217,7 @@ var WorkflowSVG = (function () {
         if(_json.labels && _json.labels.length > 0){
             _json.labels.forEach( l =>{
                 var label = _draw.labels.text(l.value).x(l.x).y(l.y);
-                if(_json.configuration.readonly!=true){
+                if(_json.configuration.read_only!=true){
                     label
                         .attr({'cursor': 'move', 'fill': l.color})
                         .draggable()
@@ -500,7 +500,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateX(group, position){
-        var width = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
+        var width = (group.entity.display_type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
 
         switch(position){
             case 'right':
@@ -514,7 +514,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateY(group, position){
-        var height = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
+        var height = (group.entity.display_type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
 
         switch(position){
             case 'right':
@@ -572,7 +572,7 @@ var WorkflowSVG = (function () {
             _json.configuration = {};
         }
 
-        _json.configuration.readonly = _json.configuration.readonly ? _json.configuration.readonly  : false; 
+        _json.configuration.read_only = _json.configuration.read_only ? _json.configuration.read_only  : false; 
         _json.configuration.line_color = _json.configuration.line_color ? _json.configuration.line_color : '#000000';
         _json.configuration.arrow_type = _json.configuration.arrow_type ? _json.configuration.arrow_type : 'default';
         _json.configuration.grid_type = _json.configuration.grid_type ? _json.configuration.grid_type : 'dynamic';
@@ -598,9 +598,9 @@ var WorkflowSVG = (function () {
         }
 
         _json.entities.map(entity => {
-            entity.displaytype = entity.displaytype ? entity.displaytype: 'entity';
+            entity.display_type = entity.display_type ? entity.display_type: 'entity';
 
-            if(entity.displaytype==='operation'){
+            if(entity.display_type==='operation'){
                 entity.height = entity.width;
             }
         })

@@ -30,7 +30,7 @@ var WorkflowSVG = (function () {
         _draw.entities.push(group);
 
         //assginment and default values for entities
-        entity.backgroundcolor = entity.backgroundcolor ? entity.backgroundcolor : '#f06';
+        entity.background_color = entity.background_color ? entity.background_color : '#f06';
         entity.color = entity.color ? entity.color : '#ffffff';
         entity.radius = entity.radius ? entity.radius : 0;
 
@@ -40,12 +40,12 @@ var WorkflowSVG = (function () {
         group.entity = group.rect(entity.width, entity.height)
             .cx((entity.width/2))
             .cy((entity.height/2))
-            .attr({ fill: entity.backgroundcolor })
+            .attr({ fill: entity.background_color })
             .radius(entity.radius);
 
-        group.entity.displaytype = entity.displaytype;
+        group.entity.type = entity.type;
 
-        if(entity.displaytype==='operation'){
+        if(entity.type==='operation'){
             group.entity.transform({'rotate': 45, origin: 'center center'});
         }
 
@@ -53,24 +53,34 @@ var WorkflowSVG = (function () {
             group.entity.attr("class", entity.class);
         }
 
-        var text = group.text(entity.text)
+        var text = group.plain(entity.text)
             .cx((entity.width/2))
             .cy(entity.height/2)
-            .attr({ fill: entity.color})
-            .font({
-                family: 'Helvetica'
-            });
+            .attr({ fill: entity.color});
 
-        if(entity.faicon && entity.faicon.length>0){
+        if(entity.fa_unicode && entity.fa_unicode.length>0){
             text.dx(10);
-
-            group.foreignObject(20, 20)
+                
+            group.icon = group.plain()
                 .cy(entity.height/2)
                 .x( entity.text.length>0 ? text.x()-20 : (entity.height/2)-10)
-                .add(SVG('<i class="'+entity.faicon+'" style="color:'+entity.color+'"></i>'));     
+                .attr({ fill: entity.color});
+
+            if(_json.configuration.font_awesome == 4){
+                group.icon.font({
+                    family: 'font_awesome'
+                });
+            }
+    
+            if(_json.configuration.font_awesome == 5){
+                group.icon.font({
+                    family: '"Font Awesome 5 Free"'
+                });
+            }
+
+            var faContentCode = entity.fa_unicode.startsWith('&#x') ? entity.fa_unicode : '&#x'+entity.fa_unicode+';';
+            group.icon.node.innerHTML = faContentCode;
         }
-
-
 
         group.arrows = group.group();
 
@@ -79,7 +89,7 @@ var WorkflowSVG = (function () {
                             .cy((entity.height/2))
                             .attr({ opacity: '0', fill:'#FFBF00'});
 
-        if(entity.displaytype==='operation'){
+        if(entity.type==='operation'){
             hoverArea.transform({'rotate': 45});
         }
         
@@ -91,7 +101,7 @@ var WorkflowSVG = (function () {
             .cy((entity.height/2))
             .attr({opacity: 0});
 
-        if(!_json.configuration.readonly){
+        if(!_json.configuration.read_only){
             draggableElement.draggable()
             .on('dragmove.namespace', (e) => {
                 e.preventDefault();
@@ -163,7 +173,6 @@ var WorkflowSVG = (function () {
         }
 
         group.move(entity.x-MARGIN, entity.y-MARGIN);
-
     }
 
     function _renderGrid() {
@@ -208,7 +217,7 @@ var WorkflowSVG = (function () {
         if(_json.labels && _json.labels.length > 0){
             _json.labels.forEach( l =>{
                 var label = _draw.labels.text(l.value).x(l.x).y(l.y);
-                if(_json.configuration.readonly!=true){
+                if(_json.configuration.read_only!=true){
                     label
                         .attr({'cursor': 'move', 'fill': l.color})
                         .draggable()
@@ -403,7 +412,7 @@ var WorkflowSVG = (function () {
         // corner cases
         if(code === 1 || code === -1 || code === 3 || code === -3){
             if(line.from.point === 'top' ){
-                if(y1 <= y2){
+                if(y1 < (y2+20)){
                     pointsInBetween.push({x: x1, y:y1-20});
     
                     if(line.to.point === 'left'){
@@ -420,7 +429,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'bottom'){
-                if(y1 >= y2){
+                if(y1 > (y2-20)){
                     pointsInBetween.push({x: x1, y:y1+20});
                     if(line.to.point === 'left'){
                         pointsInBetween.push({x: x2-20,  y:y1+20});
@@ -436,7 +445,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'left'){
-                if(y1 > y2){
+                if(y1 > (y2-20)){
                     if(line.to.point === 'top'){
                         pointsInBetween.push({x: x1-20,  y:y1});
                         pointsInBetween.push({x: x1-20,  y:y2-20});
@@ -457,7 +466,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'right'){
-                if(y1 > y2){
+                if(y1 > (y2-20)){
                     if(line.to.point === 'top'){
                         pointsInBetween.push({x: x1+20,  y:y1});
                         pointsInBetween.push({x: x1+20,  y:y2-20});
@@ -491,7 +500,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateX(group, position){
-        var width = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
+        var width = (group.entity.type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('width');
 
         switch(position){
             case 'right':
@@ -505,7 +514,7 @@ var WorkflowSVG = (function () {
     }
 
     function _calculateY(group, position){
-        var height = (group.entity.displaytype==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
+        var height = (group.entity.type==='operation') ? _pythagorean(group.entity.attr('width'), group.entity.attr('height')) : group.entity.attr('height');
 
         switch(position){
             case 'right':
@@ -563,7 +572,7 @@ var WorkflowSVG = (function () {
             _json.configuration = {};
         }
 
-        _json.configuration.readonly = _json.configuration.readonly ? _json.configuration.readonly  : false; 
+        _json.configuration.read_only = _json.configuration.read_only ? _json.configuration.read_only  : false; 
         _json.configuration.line_color = _json.configuration.line_color ? _json.configuration.line_color : '#000000';
         _json.configuration.arrow_type = _json.configuration.arrow_type ? _json.configuration.arrow_type : 'default';
         _json.configuration.grid_type = _json.configuration.grid_type ? _json.configuration.grid_type : 'dynamic';
@@ -589,9 +598,9 @@ var WorkflowSVG = (function () {
         }
 
         _json.entities.map(entity => {
-            entity.displaytype = entity.displaytype ? entity.displaytype: 'entity';
+            entity.type = entity.type ? entity.type: 'entity';
 
-            if(entity.displaytype==='operation'){
+            if(entity.type==='operation'){
                 entity.height = entity.width;
             }
         })

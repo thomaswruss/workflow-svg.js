@@ -58,6 +58,7 @@ p{
 
 ul {
     line-height: 2;
+    list-style-type:square;
 }
 
 .code{

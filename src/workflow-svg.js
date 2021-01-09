@@ -412,7 +412,7 @@ var WorkflowSVG = (function () {
         // corner cases
         if(code === 1 || code === -1 || code === 3 || code === -3){
             if(line.from.point === 'top' ){
-                if(y1 <= y2){
+                if(y1 < (y2+20)){
                     pointsInBetween.push({x: x1, y:y1-20});
     
                     if(line.to.point === 'left'){
@@ -429,7 +429,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'bottom'){
-                if(y1 >= y2){
+                if(y1 > (y2-20)){
                     pointsInBetween.push({x: x1, y:y1+20});
                     if(line.to.point === 'left'){
                         pointsInBetween.push({x: x2-20,  y:y1+20});
@@ -445,7 +445,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'left'){
-                if(y1 > y2){
+                if(y1 > (y2-20)){
                     if(line.to.point === 'top'){
                         pointsInBetween.push({x: x1-20,  y:y1});
                         pointsInBetween.push({x: x1-20,  y:y2-20});
@@ -466,7 +466,7 @@ var WorkflowSVG = (function () {
             }
 
             if(line.from.point === 'right'){
-                if(y1 > y2){
+                if(y1 > (y2-20)){
                     if(line.to.point === 'top'){
                         pointsInBetween.push({x: x1+20,  y:y1});
                         pointsInBetween.push({x: x1+20,  y:y2-20});

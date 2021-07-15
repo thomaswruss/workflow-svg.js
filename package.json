@@ -1,6 +1,6 @@
 {
   "name": "workflow-svg.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "main": "./dist/workflow-svg.minified.js",
   "dependencies": {
@@ -9,9 +9,9 @@
     "@svgdotjs/svg.js": "^3.0.16"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
     "babel-preset-minify": "^0.5.1"
   },
   "scripts": {

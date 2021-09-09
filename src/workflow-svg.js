@@ -456,7 +456,13 @@ var WorkflowSVG = (function () {
                     
                 } else {
                     if(line.to.point === 'top'){
-                        pointsInBetween.push({x: x2, y:y1});
+                        if(x2 > (x1-20)){
+                            pointsInBetween.push({x: x1-20, y:y1});
+                            pointsInBetween.push({x: x1-20, y:y2-20});
+                            pointsInBetween.push({x: x2, y:y2-20});
+                        } else {
+                            pointsInBetween.push({x: x2, y:y1});
+                        }
                     } else{
                         pointsInBetween.push({x: x1-20,  y:y1});
                         pointsInBetween.push({x: x1-20,  y:y2+20});
@@ -477,7 +483,13 @@ var WorkflowSVG = (function () {
                     
                 } else {
                     if(line.to.point === 'top'){
-                        pointsInBetween.push({x: x2, y:y1});
+                        if(x1 > (x2-20)){
+                            pointsInBetween.push({x: x1+20, y:y1});
+                            pointsInBetween.push({x: x1+20, y:y2-20});
+                            pointsInBetween.push({x: x2, y:y2-20});
+                        } else {
+                            pointsInBetween.push({x: x2, y:y1});
+                        }
                     } else{
                         pointsInBetween.push({x: x1+20,  y:y1});
                         pointsInBetween.push({x: x1+20,  y:y2+20});

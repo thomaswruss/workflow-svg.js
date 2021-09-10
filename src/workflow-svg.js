@@ -418,7 +418,27 @@ var WorkflowSVG = (function () {
                         pointsInBetween.push({x: x2-20,  y:y1-20});
                         pointsInBetween.push({x: x2-20,  y:y2});
                     } else {
-                        pointsInBetween.push({x: x1, y:y2});
+                        if(x1 > (x2-20)){
+                            pointsInBetween.push({x: x1, y:y1-20});
+                            pointsInBetween.push({x: x2-20,  y:y1-20});
+                            pointsInBetween.push({x: x2-20,  y:y2});
+                        } else {
+                            pointsInBetween.push({x: x1, y:y2});
+                        }
+                    }
+                } else if (line.to.point === 'right'){
+                    if(y1 < (y2+20)){
+                        pointsInBetween.push({x: x1, y:y1-20});
+                        pointsInBetween.push({x: x2+20,  y:y1-20});
+                        pointsInBetween.push({x: x2+20,  y:y2});
+                    } else {
+                        if(x2 > (x1-20)){
+                            pointsInBetween.push({x: x1, y:y1-20});
+                            pointsInBetween.push({x: x2+20,  y:y1-20});
+                            pointsInBetween.push({x: x2+20,  y:y2});
+                        } else {
+                            pointsInBetween.push({x: x1, y:y2});
+                        }
                     }
                 } else {
                     if(y1 < (y2+20)){
@@ -438,7 +458,27 @@ var WorkflowSVG = (function () {
                         pointsInBetween.push({x: x2-20,  y:y1+20});
                         pointsInBetween.push({x: x2-20,  y:y2});
                     } else {
-                        pointsInBetween.push({x: x1, y:y2});
+                        if(x1 > (x2-20)){
+                            pointsInBetween.push({x: x1, y:y1+20});
+                            pointsInBetween.push({x: x2-20,  y:y1+20});
+                            pointsInBetween.push({x: x2-20,  y:y2});
+                        } else {
+                            pointsInBetween.push({x: x1, y:y2});
+                        }
+                    }
+                } else if(line.to.point === 'right') {
+                    if(y1 > (y2-20)){
+                        pointsInBetween.push({x: x1, y:y1+20});
+                        pointsInBetween.push({x: x2-20,  y:y1+20});
+                        pointsInBetween.push({x: x2-20,  y:y2});
+                    } else {
+                        if(x2 > (x1-20)){
+                            pointsInBetween.push({x: x1, y:y1+20});
+                            pointsInBetween.push({x: x2+20,  y:y1+20});
+                            pointsInBetween.push({x: x2+20,  y:y2});
+                        } else {
+                            pointsInBetween.push({x: x1, y:y2});
+                        }
                     }
                 } else {
                     if(y1 > (y2-20)){

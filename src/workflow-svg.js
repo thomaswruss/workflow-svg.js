@@ -412,35 +412,42 @@ var WorkflowSVG = (function () {
         // corner cases
         if(code === 1 || code === -1 || code === 3 || code === -3){
             if(line.from.point === 'top' ){
-                if(y1 < (y2+20)){
-                    pointsInBetween.push({x: x1, y:y1-20});
-    
-                    if(line.to.point === 'left'){
+                if(line.to.point === 'left'){
+                    if(y1 < (y2+20)){
+                        pointsInBetween.push({x: x1, y:y1-20});
                         pointsInBetween.push({x: x2-20,  y:y1-20});
                         pointsInBetween.push({x: x2-20,  y:y2});
-                    } else{
+                    } else {
+                        pointsInBetween.push({x: x1, y:y2});
+                    }
+                } else {
+                    if(y1 < (y2+20)){
+                        pointsInBetween.push({x: x1, y:y1-20});
                         pointsInBetween.push({x: x2+20,  y:y1-20});
                         pointsInBetween.push({x: x2+20,  y:y2});
+                    } else {
+                        pointsInBetween.push({x: x1, y:y2});
                     }
-    
-                } else {
-                    pointsInBetween.push({x: x1, y:y2});
                 }
             }
 
             if(line.from.point === 'bottom'){
-                if(y1 > (y2-20)){
-                    pointsInBetween.push({x: x1, y:y1+20});
-                    if(line.to.point === 'left'){
+                if(line.to.point === 'left'){
+                    if(y1 > (y2-20)){
+                        pointsInBetween.push({x: x1, y:y1+20});
                         pointsInBetween.push({x: x2-20,  y:y1+20});
                         pointsInBetween.push({x: x2-20,  y:y2});
-                    }else{
+                    } else {
+                        pointsInBetween.push({x: x1, y:y2});
+                    }
+                } else {
+                    if(y1 > (y2-20)){
+                        pointsInBetween.push({x: x1, y:y1+20});
                         pointsInBetween.push({x: x2+20,  y:y1+20});
                         pointsInBetween.push({x: x2+20,  y:y2});
+                    } else {
+                        pointsInBetween.push({x: x1, y:y2});
                     }
-                    
-                } else {
-                    pointsInBetween.push({x: x1, y:y2});
                 }
             }
 
@@ -461,7 +468,13 @@ var WorkflowSVG = (function () {
                     }
                 } else if(line.to.point === 'bottom') {
                     if(y1 > (y2+20)){
-                        pointsInBetween.push({x: x2, y:y1});
+                        if(x2 > (x1-20)){
+                            pointsInBetween.push({x: x1-20, y:y1});
+                            pointsInBetween.push({x: x1-20, y:y2+20});
+                            pointsInBetween.push({x: x2, y:y2+20});
+                        } else {
+                            pointsInBetween.push({x: x2, y:y1});
+                        }
                     } else {
                         pointsInBetween.push({x: x1-20,  y:y1});
                         pointsInBetween.push({x: x1-20,  y:y2+20});
@@ -495,7 +508,13 @@ var WorkflowSVG = (function () {
                     }
                 } else if(line.to.point === 'bottom') {
                     if(y1 > (y2+20)){ 
-                        pointsInBetween.push({x: x2, y:y1});
+                        if(x1 > (x2-20)){
+                            pointsInBetween.push({x: x1+20, y:y1});
+                            pointsInBetween.push({x: x1+20, y:y2+20});
+                            pointsInBetween.push({x: x2, y:y2+20});
+                        } else {
+                            pointsInBetween.push({x: x2, y:y1});
+                        }
                     } else {
                         pointsInBetween.push({x: x1+20,  y:y1});
                         pointsInBetween.push({x: x1+20,  y:y2+20});

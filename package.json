@@ -1,8 +1,8 @@
 {
   "name": "workflow-svg.js",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "",
-  "main": "./dist/workflow-svg.minified.js",
+  "main": "./dist/workflow-svg.esm.js",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@svgdotjs/svg.draggable.js": "^3.0.2",
@@ -17,8 +17,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:raw": "cp src/workflow-svg.js dist/workflow-svg.js",
-    "build:minified": "./node_modules/.bin/babel src/workflow-svg.js --out-file dist/workflow-svg.minified.js",
-    "build": "npm run-script build:raw && npm run-script build:minified"
+    "build:esm": "npx babel dist/workflow-svg.js --out-file dist/workflow-svg.esm.js --env-name esm -s",
+    "build:commonjs": "npx babel dist/workflow-svg.js --out-file dist/workflow-svg.commonjs.js --env-name commonjs -s",
+    "build": "npm run-script build:raw && npm run-script build:esm && npm run-script build:commonjs",
+    "start": "npx serve"
   },
   "author": "Thomas Wruß",
   "license": "MIT",

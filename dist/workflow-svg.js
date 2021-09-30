@@ -1,4 +1,4 @@
-var WorkflowSVG = (function () {
+export default function WorkflowSVG() {
     const PADDING = 10;
     const MARGIN = 25;
     var _json = { entities:[]};
@@ -748,7 +748,4 @@ var WorkflowSVG = (function () {
         register: register,
         get: get
     }
-});
-
-var module = module || {}; 
-module.exports=WorkflowSVG;
+}

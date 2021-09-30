@@ -1,0 +1,26 @@
+{
+    "env": {
+      "esm": {
+         "presets": [
+            [
+              "@babel/env",
+              {
+                "modules": false
+              }
+            ],
+            ["minify"]
+          ]
+       },
+      "commonjs": {
+        "presets": [
+            [
+              "@babel/env",
+              {
+                "modules": "commonjs"
+              }
+            ],
+            ["minify"]
+          ]
+      }
+    }
+  }

@@ -1,3 +1,5 @@
+This project is now archived. If anyone is interested in continuing it, please contact me.
+
 # workflow-svg.js
 *workflow-svg.js* is a JS Library to present and edit workflows as SVG. You can move entities and define connections between them. It is simple to include and configure it for your project. Take a look at a real example on [https://thomaswruss.github.io/workflow-svg.js/](https://thomaswruss.github.io/workflow-svg.js/).
 
